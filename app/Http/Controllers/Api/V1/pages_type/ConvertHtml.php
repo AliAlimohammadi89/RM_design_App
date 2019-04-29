@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\V1\pages_type;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ConvertHtml extends Controller
@@ -14,6 +13,39 @@ class ConvertHtml extends Controller
     {
         $this->b2cType = $b2cType;
         $this->page_name = $page_name;
+    }
+
+    public function getfile($page_value)
+    {
+        if ($this->b2cType == 'Shopify') {
+            $p = new ShopifyPageType();
+        } else {
+            return 'in coming';
+        }
+
+        switch ($this->page_name) {
+            case 'collectionPage':
+                $fields = $p->collectionPage();
+                break;
+            case 'page404':
+                $fields = $p->page404();
+                break;
+            case 'articlePage':
+                $fields = $p->articlePage();
+                break;
+            case 'blogPage':
+                $fields = $p->blogPage();
+                break;
+            case 'cartPage':
+                $fields = $p->cartPage();
+                break;
+            default:
+                return 'no_page_find';
+                break;
+        }
+        //$fields = $p->collectionPage();
+        $return = $this->get_page($page_value, $fields);
+        return $return;
     }
 
     public function get_page($page_html_value, $convert_tags)
@@ -35,32 +67,5 @@ class ConvertHtml extends Controller
         fwrite($handle, $data);
         */
         return $page_html_value;
-    }
-
-    public function getfile($page_value)
-    {
-        if ($this->b2cType == 'shopify') {
-            $p = new ShopifyPageType();
-        } else {
-            return 'in coming';
-        }
-
-        switch ($this->page_name) {
-            case 'collection':
-                $fields = $p->collectionPage();
-                break;
-            case 'page404':
-                $fields = $p->page404();
-                break;
-           case 'articlepage':
-                $fields = $p->articlepage();
-                break;
-            default:
-                return 'no_page_find';
-                break;
-        }
-        $fields = $p->collectionPage();
-        $return = $this->get_page($page_value, $fields);
-        return $return;
     }
 }

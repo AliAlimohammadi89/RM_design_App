@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\V1\pages_type;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ShopifyPageType extends Controller
@@ -48,7 +47,7 @@ class ShopifyPageType extends Controller
         return $field;
     }
 
-    public function articlepage()
+    public function articlePage()
     {
         $field = [
             '<ARTICLE_TITLE>' => "{{ article.title }}",
@@ -73,7 +72,67 @@ class ShopifyPageType extends Controller
             '<ARTICLE_FORM_COMMENT_POST_SUBMIT>' => "{{ 'blogs.comments.post' | t }}",
             '</ARTICLE_FORM_COMMENT>' => "{% endform %}",
 
-
         ];
+    }
+
+    public function blogPage()
+    {
+        $field = [
+            '<ARTICLE_TITLE>' => "{{article.title}}",
+            '<BLOGS>' => "{% for article in blog.articles %}",
+            '</BLOGS>' => "{% endfor %}",
+
+            '<BLOG_URL>' => "{{ article.url }}",
+            '<BLOG_TITLE>' => "{{ article.title }}",
+            '<BLOG_IMAGE>' => "{{ article | img_url: '1024x1024' | img_tag: article.title }}",
+            '<BLOG_PUBLISED_AT>' => "{{ article | img_url: '1024x1024' | img_tag: article.title }}",
+            '<BLOG_CONTENT>' => "{{ article.content | strip_html | truncatewords: 50 }}",
+            '<BLOG_PAGINATE>' => "  {% if paginate.pages > 1 %} {{ paginate | default_pagination }} {% endif %} ",
+            '</BLOG_PAGINATES>' => " {% endpaginate %} ",
+        ];
+        return $field;
+    }
+
+    public function cartPage()
+    {
+        $field = [
+            '</CART_TITLE>' => "{{ 'cart.general.title' | t }}",
+            '</CART_LABEL_PRODUCT>' => "{{ 'cart.label.product' | t }}",
+            '</CART_LABEL_PRICE>' => "{{ 'cart.label.price' | t }}",
+            '</CART_LABEL_QUANTITY>' => "{{ 'cart.label.quantity' | t }}",
+            '<CART_ITEMS>' => " {% for item in cart.items %} ",
+            '</CART_ITEMS>' => " {% endfor %} ",
+            '</CART_ITEM_URL>' => "{{ item.url | within: collections.all }}",
+            '</CART_ITEM_IMAGE>' => "{% if item.variant.metafields.images.all %}
+         					 {% assign images = item.variant.metafields.images.all | split: ',' | reverse  %}
+                                          {% assign image = images[0] | split: '.jpg' %}
+                                        	{{image}}_T.jpg  
+                                         {%else%}
+                                            {% if item.product.metafields.images.all %}
+                                             {% assign images = item.product.metafields.images.all | split: \",\" | reverse  %}
+                                          {% assign image = images[0] | split: '.jpg' %}
+                                        	{{image}}_T.jpg  
+                                            {%else%}
+                                         {{ item.variant.featured_image | product_img_url: 'medium' }}
+                                            {%endif%}
+                                         {% endif %}",
+            '</CART_ITEM_VARIANT_TITLE>' => "{{ item.variant.title | escape  }}",
+            '</CART_PRODUCT_TITLE>' => " {{ item.product.title }} ",
+            '</CART_ITEM_VENDOR>' => " {{ item.vendor }}",
+            '</CART_ITEM_PRICE>' => "{{ item.price | money }}",
+            '</CART_ITEM_KEY>' => "{{ item.key }}",
+            '</CART_ITEM_QUANTITY>' => "{{ item.quantity }}",
+            '</CART_ITEM_LINE_PRICE>' => "{{ item.line_price | money }}",
+            '</CART_ITEM_DESCOUNT_TITLE>' => "{{ discount.title }}",
+            '</CART_ITEMS_FOR_LOOP_INDEX>' => "{{ forloop.index }}",
+            '</CART_NOT>' => "{{ cart.note }}",
+            '</CART_ITEMS_TOTAL_COUNT>' => " {{ cart.item_count }} {{ cart.item_count | pluralize: 'Item', 'Items' }}",
+            '</CART_ITEMS_TOTAL_PRICE>' => "{{ 'cart.general.subtotal' | t }}: {{ cart.total_price | money }}",
+            '</CART_UPTADE_TITLE>' => "{{ 'cart.general.update' | t }}",
+            '</CART_CHECKOUT_TITLE>' => " {{ 'cart.general.checkout' | t }} ",
+            '</CART_EMPTY_TITLE>' => " {{ 'cart.general.empty' | t }} ",
+            '</CART_CONTINUE_HTML>' => " {{ 'cart.general.continue_browsing_html' | t }} ",
+        ];
+        return $field;
     }
 }
