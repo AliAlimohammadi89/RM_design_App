@@ -39,6 +39,12 @@ class ConvertHtml extends Controller
             case 'cartPage':
                 $fields = $p->cartPage();
                 break;
+            case 'customerAccount':
+                $fields = $p->customer_account();
+                break;
+            case 'customerActiveAccount':
+                $fields = $p->customer_active_account();
+                break;
             default:
                 return 'no_page_find';
                 break;

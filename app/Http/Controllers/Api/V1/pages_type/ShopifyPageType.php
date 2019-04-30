@@ -135,4 +135,83 @@ class ShopifyPageType extends Controller
         ];
         return $field;
     }
+
+    public function customer_account()
+    {
+        $field = [
+            '</CUSTOMER_ACCOUNT_TITLE>' => "{{ 'customer.account.title' | t }}",
+            '</CUSTOMER_ACCOUNT_ORDER_TITLE>' => "{{ 'customer.orders.title' | t }}",
+            '</CUSTOMER_ACCOUNT_PAYMENT_STATUS_TITLE>' => "{{ 'customer.orders.payment_status' | t }}",
+            '</CUSTOMER_ACCOUNT_FULFILLMENT_TITLE>' => "{{ 'customer.orders.fulfillment_status' | t }}",
+            '</CUSTOMER_ACCOUNT_ORDER_TOTAL_TITLE>' => "{{ 'customer.orders.total' | t }}",
+            '<CUSTOMER_ORDERS>' => "{% for order in customer.orders %}",
+            '</CUSTOMER_ORDERS>' => "{% endfor %}",
+            '</CUSTOMER_ORDER_NAME>' => "{{ order.name | link_to: order.customer_url }}",
+            '</CUSTOMER_ORDER_CREATE_AT>' => "{{ order.created_at | date: format: 'month_day_year' }}",
+            '</CUSTOMER_ORDER_FINANCIAL_STATUS>' => "{{ order.financial_status_label }}",
+            '</CUSTOMER_ORDER_FULFILLMENT_STATUS>' => "{{ order.fulfillment_status_label }}",
+            '</CUSTOMER_ORDER_TOTAL_PRICE>' => "{{ order.total_price | money }}",
+            '</CUSTOMER_ORDER_NONE>' => "{{ 'customer.orders.none' | t }}",
+            '<CUSTOMER_ORDER_PAGINATION>' => "{% paginate customer.orders by 20 %}",
+            '<CUSTOMER_ORDER_PAGINATION_LIST>' => "{{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}",
+            '</CUSTOMER_ORDER_PAGINATION>' => "{% endpaginate %}",
+            '</CUSTOMER_NAME>' => "{{ customer.name }}",
+            '</CUSTOMER_EMAIL>' => "{{ customer.email }}",
+            '</CUSTOMER_DEFAULT_ADDRESS1>' => "{{ customer.default_address.address1 }}",
+            '</CUSTOMER_DEFAULT_ADDRESS2>' => "{{ customer.default_address.address2 }}",
+            '</CUSTOMER_DEFAULT_ADDRESS_CITY>' => " {{ customer.default_address.city }} ",
+            '</CUSTOMER_DEFAULT_ADDRESS_PROVINCE_CODE>' => "{{ customer.default_address.province_code | upcase }}",
+            '</CUSTOMER_DEFAULT_ADDRESS_ZIP>' => " {{ customer.default_address.zip | upcase }} ",
+            '</CUSTOMER_DEFAULT_ADDRESS_COUNTRY>' => "{{ customer.default_address.country }}  ",
+            '</CUSTOMER_DEFAULT_ADDRESS_PHONE>' => " {{ customer.default_address.phone }}",
+            '</CUSTOMER_ACCOUNT_ADDRESS_PAGE>' => "{{ 'customer.account.view_addresses' | t }} ",
+        ];
+        return $field;
+    }
+  public function customer_address()
+    {
+        $field = [
+            '</CUSTOMER_ADDRESS_FORM>' => "  {% form 'customer_address', customer.new_address %} ",
+            '<CUSTOMER_ADDRESS_ERROR_FORM>' => "  {{ form.errors | default_errors }} ",
+            '<CUSTOMER_ADDRESS_>' => " {{ 'customer.addresses.add_new' | t }} ",
+            '<CUSTOMER_ADDRESS_FIRST_NAME_TITLE>' => " {{ 'customer.addresses.first_name' | t }} ",
+            '<CUSTOMER_ADDRESS_FIRST_NAME_FORM_VALUE>' => " {{ form.first_name }} ",
+            '<CUSTOMER_ADDRESS_LAST_NAME_TITLE>' => " {{ 'customer.addresses.last_name' | t }} ",
+            '<CUSTOMER_ADDRESS_LAST_NAME_FORM_VALUE>' => " {{ form.last_name }} ",
+            '<CUSTOMER_ADDRESS_COMPANY_TITLE>' => " {{ 'customer.addresses.company' | t }} ",
+            '<CUSTOMER_ADDRESS_COMPANY_FORM_VALUE>' => " {{ form.company }} ",
+            '<CUSTOMER_ADDRESS_ADDRESS1_TITLE>' => " {{ 'customer.addresses.address1' | t }} ",
+            '<CUSTOMER_ADDRESS_ADDRESS1_FORM_VALUE>' => " {{ form.address1 }} ",
+            '<CUSTOMER_ADDRESS_ADDRESS2_TITLE>' => " {{ 'customer.addresses.address2' | t }} ",
+            '<CUSTOMER_ADDRESS_ADDRESS2_FORM_VALUE>' => " {{ form.address2 }} ",
+            '<CUSTOMER_ADDRESS_CITY_TITLE>' => " {{ 'customer.addresses.city' | t }} ",
+            '<CUSTOMER_ADDRESS_CITY_FORM_VALUE>' => " {{ form.city }} ",
+            '<CUSTOMER_ADDRESS_COUNTRY_TITLE>' => " {{ 'customer.addresses.country' | t }} ",
+            '<CUSTOMER_ADDRESS_>' => "  ",
+            '<CUSTOMER_ADDRESS_>' => "  ",
+            '<CUSTOMER_ADDRESS_>' => "  ",
+            '<CUSTOMER_ADDRESS_>' => "  ",
+            '<CUSTOMER_ADDRESS_>' => "  ",
+            '<CUSTOMER_ADDRESS_>' => "  ",
+            '<CUSTOMER_ADDRESS_>' => "  ",
+
+        ];
+        return $field;
+    }
+
+    public function customer_active_account()
+    {
+        $field = [
+            '</CUSTOMER_ACTIVE_ACCOUNT_TITLE>' => " {{ 'customer.activate_account.title' | t }} ",
+            '</CUSTOMER_ACTIVE_ACCOUNT_SUBTEXT>' => " {{ 'customer.activate_account.subtext' | t }} ",
+            '<CUSTOMER_ACTIVE_ACCOUNT_FORM>' => "  {% form 'activate_customer_password' %} ",
+            '</CUSTOMER_ACTIVE_ACCOUNT_PASSWORD_TEXT>' => " {{ 'customer.activate_account.password' | t }}",
+            '</CUSTOMER_ACTIVE_ACCOUNT_PASSWORD_CONFIRM_TEXT>' => " {{ 'customer.activate_account.password_confirm' | t }} ",
+            '</CUSTOMER_ACTIVE_ACCOUNT_SUBMIT_TEXT>' => "{{ 'customer.activate_account.submit' | t }} ",
+            '</CUSTOMER_ACTIVE_ACCOUNT_CANCEL_TEXT>' => "{{ 'customer.activate_account.cancel' | t }} ",
+            '</CUSTOMER_ACTIVE_ACCOUNT_ERROR>' => "  {{ form.errors | default_errors }} ",
+            '</CUSTOMER_ACTIVE_ACCOUNT_FORM>' => " {% endform %} ",
+        ];
+        return $field;
+    }
 }
