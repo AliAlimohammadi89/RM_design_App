@@ -168,7 +168,8 @@ class ShopifyPageType extends Controller
         ];
         return $field;
     }
-  public function customer_address()
+
+    public function customer_address()
     {
         $field = [
             '</CUSTOMER_ADDRESS_FORM>' => "  {% form 'customer_address', customer.new_address %} ",
@@ -194,7 +195,6 @@ class ShopifyPageType extends Controller
             '<CUSTOMER_ADDRESS_>' => "  ",
             '<CUSTOMER_ADDRESS_>' => "  ",
             '<CUSTOMER_ADDRESS_>' => "  ",
-
         ];
         return $field;
     }
@@ -211,6 +211,103 @@ class ShopifyPageType extends Controller
             '</CUSTOMER_ACTIVE_ACCOUNT_CANCEL_TEXT>' => "{{ 'customer.activate_account.cancel' | t }} ",
             '</CUSTOMER_ACTIVE_ACCOUNT_ERROR>' => "  {{ form.errors | default_errors }} ",
             '</CUSTOMER_ACTIVE_ACCOUNT_FORM>' => " {% endform %} ",
+        ];
+        return $field;
+    }
+
+    public function customer_login()
+    {
+        $field = [
+            '</CUSTOMER_LOGIN_RECOVER_PASSWORD>' => " {{ 'customer.recover_password.success' | t }} ",
+            '<CUSTOMER_LOGIN_FORM>' => "  {% form 'customer_login' %} ",
+            '</CUSTOMER_LOGIN_ERROR>' => " {{ form.errors | default_errors }} ",
+            '</CUSTOMER_LOGIN_TITLE>' => " {{ 'customer.login.title' | t }} ",
+            '</CUSTOMER_LOGIN_EMAIL_TITLE>' => " {{ 'customer.login.email' | t }} ",
+            '</CUSTOMER_LOGIN_PASSWORD_TITLE>' => " {{ 'customer.login.password' | t }} ",
+            '</CUSTOMER_LOGIN_FORGET_PASSWORD_TITLE>' => " {{ 'customer.login.forgot_password' | t }} ",
+            '</CUSTOMER_LOGIN_SING_IN_TITLE>' => " {{ 'customer.login.sign_in' | t }} ",
+            '</CUSTOMER_LOGIN_LOGIN_CANCEL_TITLE>' => " {{ 'customer.login.cancel' | t }} ",
+            '</CUSTOMER_LOGIN_CRETE_ACCOUNT_TITLE>' => " {{ 'layout.customer.create_account' | t | customer_register_link }} ",
+            '</CUSTOMER_LOGIN_PASSWORD_SUB_TITLE>' => " {{ 'customer.recover_password.subtext' | t }} ",
+            '</CUSTOMER_LOGIN_RECOVER_EMAIL>' => " {{ 'customer.recover_password.email' | t }} ",
+            '</CUSTOMER_LOGIN_RECOVER_PASSWORD_SUBMIT_TITLE>' => " {{ 'customer.recover_password.submit' | t }} ",
+            '</CUSTOMER_LOGIN_PASSWORD_CANCEL>' => " {{ 'customer.recover_password.cancel' | t }} ",
+            '</CUSTOMER_LOGIN_GUST_TITLE>' => " {{ 'customer.login.guest_title' | t }} ",
+            '</CUSTOMER_LOGIN_GUST_CONTINUE_TITLE>' => " {{ 'customer.login.guest_continue' | t }} ",
+            '</CUSTOMER_LOGIN_FORM>' => "{% endform %}",
+        ];
+        return $field;
+    }
+
+    public function customer_order()
+    {
+        $field = [
+            '</CUSTOMER_ORDER_ACCOUNT_TITLE>' => " {{ 'customer.account.title' | t }} ",
+            '</CUSTOMER_ORDER_ACCOUNT_RETURN>' => " {{ 'customer.account.return' | t }} ",
+            '</CUSTOMER_ORDER_TITLE>' => " {{ 'customer.order.title' | t: name: order.name }} ",
+            '</CUSTOMER_ORDER_CRETE_AT>' => " {% assign cancelled_at = order.cancelled_at | date: '%B %d, %Y %I:%M%p' %} ",
+            '</CUSTOMER_ORDER_CANCELLED_IF>' => " {% if order.cancelled %} ",
+            '</CUSTOMER_ORDER_CANCELLED>' => " {% assign cancelled_at = order.cancelled_at | date: '%B %d, %Y %I:%M%p' %}{{ 'customer.order.cancelled' | t: date: cancelled_at }} ",
+            '</CUSTOMER_ORDER_CANCELLED_REASON>' => " {{ 'customer.order.cancelled_reason' | t: reason: order.cancel_reason }} ",
+            '</CUSTOMER_ORDER_PRODUCT_TITLE>' => " {{ 'customer.order.product' | t }} ",
+            '</CUSTOMER_ORDER_SKU_TITLE>' => " {{ 'customer.order.sku' | t }} ",
+            '</CUSTOMER_ORDER_PRICE_TITLE>' => " {{ 'customer.order.price' | t }} ",
+            '</CUSTOMER_ORDER_QUANTITY_TITLE>' => " {{ 'customer.order.quantity' | t }} ",
+            '</CUSTOMER_ORDER_TOTAL_TITLE>' => " {{ 'customer.order.total' | t }} ",
+            '<CUSTOMER_ORDER_LINE_ITEMS>' => " {% for line_item in order.line_items %} ",
+            '</CUSTOMER_ORDER_LINE_ITEM_KEY>' => " {{ line_item.key }} ",
+            '</CUSTOMER_ORDER_ITEM_LINK>' => " {{ line_item.title | link_to: line_item.product.url }} ",
+            '</CUSTOMER_ORDER_LINE_ITEM_CREATE_AT_VALUE>' => "{% assign created_at = line_item.fulfillment.created_at | date: format: 'month_day_year' %} ",
+            '</CUSTOMER_ORDER_FULFILLED_IF>' => " {% if line_item.fulfillment %} ",
+            '</CUSTOMER_ORDER_FULFILLED_AT>' => "  {{ 'customer.order.fulfilled_at' | t: date: created_at }} ",
+            '</CUSTOMER_ORDER_FULFILLMENT_IF>' => " {% if line_item.fulfillment %} ",
+            '</CUSTOMER_ORDER_FULFILLMENT_TRACKING_IF>' => " {% if line_item.fulfillment.tracking_number %} ",
+            '</CUSTOMER_ORDER_FULFILLMENT_TRACKING_URL>' => " {{ line_item.fulfillment.tracking_url }} ",
+            '</CUSTOMER_ORDER_FULFILLMENT_TRACKING_COMPANY>' => " {{ line_item.fulfillment.tracking_company }} ",
+            '</CUSTOMER_ORDER_FULFILLMENT_TRACKING_NUMBER>' => " {{ line_item.fulfillment.tracking_number}} ",
+            '</ENDIF>' => "{% endif %}  ",
+            '</ENDFOR>' => "{% endfor %}  ",
+            '</CUSTOMER_>' => "{{ line_item.sku }} ",
+            '</CUSTOMER_ORDER_LINE_ITEM_SKU>' => "{{ line_item.sku }} ",
+            '</CUSTOMER_ORDER_LINE_ITEM_MONEY>' => "{{ line_item.price | money }} ",
+            '</CUSTOMER_ORDER_LINE_ITEM_QUANTITY>' => "{{ line_item.quantity }} ",
+            '</CUSTOMER_ORDER_LINE_ITEM_QUANTITY_MONEY>' => "{{ line_item.quantity | times: line_item.price | money }} ",
+            '<CUSTOMER_ORDER_DISCOUNTS>' => " {% for discount in order.discounts %} ",
+            '<CUSTOMER_ORDER_DISCOUNT_CODE>' => " {{ discount.code }} ",
+            '<CUSTOMER_ORDER_DISCOUNT_TITLE>' => " {{ 'customer.order.discount' | t }} ",
+            '<CUSTOMER_ORDER_DISCOUNT_MONEY>' => " {{ discount.savings | money }} ",
+            '<CUSTOMER_ORDER_SHIPPING_METHODS>' => "  {% for shipping_method in order.shipping_methods %} ",
+            '</CUSTOMER_ORDER_SHIPPING_METHOD_TITLE>' => " {{ 'customer.order.shipping' | t }} ({{ shipping_method.title }}) ",
+            '</CUSTOMER_ORDER_SHIPPING_METHOD_PRICE>' => " {{ shipping_method.price | money }}",
+            '</CUSTOMER_ORDER_SUBTOTAL>' => " {{ 'customer.order.subtotal' | t }} ",
+            '</CUSTOMER_ORDER_PRICE_MONEY>' => " {{ order.subtotal_price | money }} ",
+            '<CUSTOMER_ORDER_TEXT_LINES>' => " {% for tax_line in order.tax_lines %} ",
+            '</CUSTOMER_ORDER_TAX_TITLE>' => " {{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%) ",
+            '</CUSTOMER_ORDER_TAX_PRICE>' => " {{ tax_line.price | money }} ",
+            '</CUSTOMER_ORDER_TAX_TOTAL_PRICE>' => " {{ order.total_price | money }} {{ order.currency }} ",
+            '</CUSTOMER_ORDER_BILLING_ADDRESS_TITLE>' => " {{ 'customer.order.billing_address' | t }} ",
+            '</CUSTOMER_ORDER_PAYMENT_STATUS>' => " {{ 'customer.order.payment_status' | t }} ",
+            '</CUSTOMER_ORDER_PAYMENT_STATUS_LABEL>' => " {{ order.financial_status_label }} ",
+            '</CUSTOMER_ORDER_BILLING_ADDRESS_NAME>' => " {{ order.billing_address.name }} ",
+            '</CUSTOMER_ORDER_BILLING_ADDRESS_COMPANY>' => " {% if order.billing_address.company != '' %}{{ order.billing_address.company }} {% endif %} ",
+            '</CUSTOMER_ORDER_BILLING_ADDRESS_STREET>' => "  {{ order.billing_address.street }} ",
+            '</CUSTOMER_ORDER_BILLING_ADDRESS_CITY>' => "  {{ order.billing_address.city }} ",
+            '</CUSTOMER_ORDER_BILLING_ADDRESS_PROVINCE>' => " {% if order.billing_address.province != '' %}{{ order.billing_address.province }}{% endif %} ",
+            '</CUSTOMER_ORDER_BILLING_ADDRESS_ZIP>' => " {{ order.billing_address.zip | upcase }} ",
+            '</CUSTOMER_ORDER_BILLING_ADDRESS_COUNTRY>' => "  {{ order.billing_address.country }} ",
+            '</CUSTOMER_ORDER_BILLING_ADDRESS_PHONE>' => " {{ order.billing_address.phone }} ",
+            '</CUSTOMER_ORDER_SHIPPING_ADDRESS_TITLE>' => " {{ 'customer.order.shipping_address' | t }} ",
+            '</CUSTOMER_ORDER_FULFILLMENT_STATUS_TITLE>' => " {{ 'customer.order.fulfillment_status' | t }} ",
+            '</CUSTOMER_ORDER_FULFILLMENT_STATUS_LABEL>' => " {{ order.fulfillment_status_label }} ",
+            '</CUSTOMER_ORDER_SHIPPING_ADDRESS_NAME>' => " {{ order.shipping_address.name }} ",
+            '</CUSTOMER_ORDER_SHIPPING_ADDRESS_COMPANY>' => "{% if order.shipping_address.company != '' %}{{ order.shipping_address.company }}{% endif %}  ",
+            '</CUSTOMER_ORDER_SHIPPING_ADDRESS_STREET>' => " {{ order.shipping_address.street }} ",
+            '</CUSTOMER_ORDER_SHIPPING_ADDRESS_CITY>' => " {{ order.shipping_address.city }} ",
+            '</CUSTOMER_ORDER_SHIPPING_ADDRESS_PROVINCE>' => "  {% if order.shipping_address.province != '' %}{{ order.shipping_address.province }}{% endif %} ",
+            '</CUSTOMER_ORDER_SHIPPING_ADDRESS_ZIP>' => "  {{ order.shipping_address.zip | upcase }} ",
+            '</CUSTOMER_ORDER_SHIPPING_ADDRESS_COUNTRY>' => " {{ order.shipping_address.country }} ",
+            '</CUSTOMER_ORDER_SHIPPING_ADDRESS_PHONE>' => "  {{ order.shipping_address.phone }} ",
+            '</CUSTOMER_ORDER_SHIPPING_ADDRESS_>' => "  ",
         ];
         return $field;
     }

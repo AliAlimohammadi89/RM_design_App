@@ -45,11 +45,14 @@ class ConvertHtml extends Controller
             case 'customerActiveAccount':
                 $fields = $p->customer_active_account();
                 break;
+            case 'CustomerLogin':
+                $fields = $p->customer_login();
+                break;
             default:
                 return 'no_page_find';
                 break;
         }
-        //$fields = $p->collectionPage();
+
         $return = $this->get_page($page_value, $fields);
         return $return;
     }
@@ -59,10 +62,7 @@ class ConvertHtml extends Controller
         $i = 0;
         foreach ($page_html_value as $name) {
             foreach ($convert_tags as $convert_tag_key => $convert_tag_value) {
-                if (stripos($name, $convert_tag_key) !== false) {
-                    $page_html_value[$i] = "$convert_tag_value 
-";
-                }
+                $page_html_value[$i] = str_replace($convert_tag_key, $convert_tag_value, $page_html_value[$i]);
             }
             $i++;
         }

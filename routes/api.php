@@ -15,7 +15,7 @@
 //    return $request->user();
 //});
 
-Route::post('/set_field', 'Api\V1\ConvertHtmlToLiquidController@get_field');
+Route::post('/set_field', 'Api\V1\ConvertHtmlToB2CStoreController@get_field');
 
 
 
