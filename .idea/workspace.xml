@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b12a53cd-8db7-4c39-a227-74280c5d64da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/ConvertHtml.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/ConvertHtml.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/ShopifyPageType.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/ShopifyPageType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/liquid.liquid" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,14 +28,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="191" />
-          <entry key="php" value="8226" />
+          <entry key="php" value="9175" />
           <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="192" />
-          <entry key="PHP" value="8225" />
+          <entry key="PHP" value="9174" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
@@ -91,8 +88,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/ShopifyPageType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="659">
-              <caret line="313" column="1" selection-start-line="313" selection-start-column="1" selection-end-line="313" selection-end-column="1" />
+            <state relative-caret-position="384">
+              <caret line="171" column="35" lean-forward="true" selection-start-line="171" selection-start-column="35" selection-end-line="171" selection-end-column="35" />
               <folding>
                 <element signature="e#143#2727#0#PHP" />
                 <element signature="e#199#2697#0#PHP" />
@@ -107,12 +104,14 @@
                 <element signature="e#8361#10792#0#PHP" />
                 <element signature="e#8419#10762#0#PHP" />
                 <element signature="e#10798#12615#0#PHP" />
-                <element signature="e#10856#12585#0#PHP" />
                 <element signature="e#12621#13627#0#PHP" />
                 <element signature="e#12686#13597#0#PHP" />
                 <element signature="e#13632#15324#0#PHP" />
-                <element signature="e#15330#18805#0#PHP" />
+                <element signature="e#15344#22059#0#PHP" />
                 <element signature="e#15386#20394#0#PHP" />
+                <element signature="e#22058#28780#0#PHP" />
+                <element signature="e#22117#23559#0#PHP" />
+                <element signature="e#25085#25371#0#PHP" />
               </folding>
             </state>
           </provider>
@@ -186,6 +185,7 @@
       <find>&lt;/CUSTOMER_ORDER_SHIPPING_ADDRESS_PHONE&gt;</find>
       <find>shipping_method in order.shipping_methods</find>
       <find>CUSTOMER_ORDER_TAX_TOTAL_PRICE</find>
+      <find>{% if form.first_name %}</find>
     </findStrings>
     <replaceStrings>
       <replace>$page</replace>
@@ -321,7 +321,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
-    <option name="width" value="1018" />
+    <option name="width" value="990" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -454,15 +454,15 @@
       <workItem from="1556345055421" duration="79332000" />
       <workItem from="1556628569184" duration="597000" />
       <workItem from="1556710179549" duration="779000" />
-      <workItem from="1556711274238" duration="11814000" />
+      <workItem from="1556711274238" duration="20920000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92522000" />
+    <option name="totallyTimeSpent" value="101628000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1018" height="1047" extended-state="0" />
+    <frame x="-7" y="0" width="990" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="npm" order="0" sideWeight="0.50054765" side_tool="true" weight="0.43595505" />
@@ -713,8 +713,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/ShopifyPageType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="659">
-          <caret line="313" column="1" selection-start-line="313" selection-start-column="1" selection-end-line="313" selection-end-column="1" />
+        <state relative-caret-position="384">
+          <caret line="171" column="35" lean-forward="true" selection-start-line="171" selection-start-column="35" selection-end-line="171" selection-end-column="35" />
           <folding>
             <element signature="e#143#2727#0#PHP" />
             <element signature="e#199#2697#0#PHP" />
@@ -729,12 +729,14 @@
             <element signature="e#8361#10792#0#PHP" />
             <element signature="e#8419#10762#0#PHP" />
             <element signature="e#10798#12615#0#PHP" />
-            <element signature="e#10856#12585#0#PHP" />
             <element signature="e#12621#13627#0#PHP" />
             <element signature="e#12686#13597#0#PHP" />
             <element signature="e#13632#15324#0#PHP" />
-            <element signature="e#15330#18805#0#PHP" />
+            <element signature="e#15344#22059#0#PHP" />
             <element signature="e#15386#20394#0#PHP" />
+            <element signature="e#22058#28780#0#PHP" />
+            <element signature="e#22117#23559#0#PHP" />
+            <element signature="e#25085#25371#0#PHP" />
           </folding>
         </state>
       </provider>

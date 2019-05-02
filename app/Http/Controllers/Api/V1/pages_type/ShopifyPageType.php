@@ -311,4 +311,54 @@ class ShopifyPageType extends Controller
         ];
         return $field;
     }
+
+    public function customer_register()
+    {
+        $field = [
+            '</CUSTOMER_REGISTER_PASSWORD_SUCCESS_TITLE>' => "  {{ 'customer.recover_password.success' | t }} ",
+            '</CUSTOMER_REGISTER_RECOVER_PASSWORD_TITLE>' => " {{ 'customer.recover_password.title' | t }} ",
+            '</CUSTOMER_REGISTER_RECOVER_PASSWORD_SUBTITLE>' => " {{ 'customer.recover_password.subtext' | t }} ",
+            '<CUSTOMER_REGISTER_RECOVER_PASSWORD>' => " {% form 'recover_customer_password' %} ",
+            '</CUSTOMER_REGISTER_RECOVER_PASSWORD_FORM_ERROR>' => " {{ form.errors | default_errors }} ",
+            '</CUSTOMER_REGISTER_RECOVER_PASSWORD_FORM_RECOVER_PASSWORD_EMAIL>' => " {{ 'customer.recover_password.email' | t }} ",
+            '</CUSTOMER_REGISTER_RECOVER_PASSWORD_FORM_SUBMIT_TITLE>' => " {{ 'customer.recover_password.submit' | t }} ",
+            '</CUSTOMER_REGISTER_RECOVER_PASSWORD_FORM_CANCEL_TITLE>' => " {{ 'customer.recover_password.cancel' | t }} ",
+            '</CUSTOMER_REGISTER_CHECKOUT_GUST_LOGIN_IF>' => "  {% if shop.checkout.guest_login %} ",
+            '</CUSTOMER_REGISTER_LOGIN_GUEST_TITLE>' => " {{ 'customer.login.guest_title' | t }} ",
+            '<CUSTOMER_REGISTER_GUST_LOGIN_FORM>' => "  {% form 'guest_login' %} ",
+            '</CUSTOMER_REGISTER_GUST_LOGIN_FORM_GUEST_CONTINUE_TITLE>' => " {{ 'customer.login.guest_continue' | t }} ",
+            '</CUSTOMER_REGISTER_TITLE_TEXT>' => " {{ 'customer.register.title' | t }} ",
+            '<CUSTOMER_REGISTER_CREATE_CUSTOMER_FORM>' => " {% form 'create_customer' %} ",
+            '</CUSTOMER_REGISTER_CREATE_CUSTOMER_FORM_ERROR>' => "  {{ form.errors | default_errors }} ",
+            '</CUSTOMER_REGISTER_CREATE_CUSTOMER_FORM_FIRST_NAME_TITLE>' => " {{ 'customer.register.first_name' | t }} ",
+            '</CUSTOMER_REGISTER_CREATE_CUSTOMER_FORM_FIRST_NAME_RETURN_VALUE>' => " {% if form.first_name %}{{ form.first_name }}{% endif %} ",
+            '</CUSTOMER_REGISTER_CREATE_CUSTOMER_FORM_FIRST_LAST_NAME_TITLE>' => " {{ 'customer.register.last_name' | t }} ",
+            '</CUSTOMER_REGISTER_CREATE_CUSTOMER_FORM_LAST_NAME_RETURN_VALUE>' => " {% if form.last_name %}{{ form.last_name }}{% endif %} ",
+            '</CUSTOMER_REGISTER_CREATE_CUSTOMER_FORM_EMAIL_TITLE>' => " {{ 'customer.register.email' | t }} ",
+            '</CUSTOMER_REGISTER_CREATE_CUSTOMER_FORM_EMAIL_RETURN_VALUE>' => " {% if form.email %}{{ form.email }}{% endif %} ",
+            '</CUSTOMER_REGISTER_CREATE_CUSTOMER_FORM_PASSWORD_TITLE>' => " {{ 'customer.register.password' | t }} ",
+            '</CUSTOMER_REGISTER_CREATE_CUSTOMER_FORM_SUBMIT_TITLE>' => " {{ 'customer.register.submit' | t }} ",
+            '</CUSTOMER_REGISTER_CREATE_CUSTOMER_FORM_SHOP_URL>' => " {{ shop.url }} ",
+            '</CUSTOMER_REGISTER_CREATE_CUSTOMER_FORM_SHOP_CANCEL_TITLE>' => " {{ 'customer.register.cancel' | t }} ",
+            '</END_FORM>' => "{% endform %}",
+            '</ENDIF>' => "{% endif %}  ",
+        ];
+        return $field;
+    }
+
+    public function customer_reset_password()
+    {
+        $field = [
+            '<CUSTOMER_RESET_PASSWORD_FORM>' => "  {% form 'reset_customer_password' %} ",
+            '<CUSTOMER_RESET_PASSWORD_FORM_TITLE>' => "  {{ 'customer.reset_password.title' | t }} ",
+            '<CUSTOMER_RESET_PASSWORD_FORM_SUB_TEXT_TITLE>' => " {{ 'customer.reset_password.subtext' | t: email: email }} ",
+            '<CUSTOMER_RESET_PASSWORD_FORM_ERROR>' => " {{ form.errors | default_errors }} ",
+            '<CUSTOMER_RESET_PASSWORD_FORM_PASSWORD_TITLE>' => " {{ 'customer.reset_password.password' | t }} ",
+            '<CUSTOMER_RESET_PASSWORD_FORM_PASSWORD_CONFIRM>' => " {{ 'customer.reset_password.password_confirm' | t }} ",
+            '<CUSTOMER_RESET_PASSWORD_FORM_SUBMIT>' => " {{ 'customer.reset_password.submit' | t }} ",
+            '</END_FORM>' => "{% endform %}",
+            '</ENDIF>' => "{% endif %}  ",
+        ];
+        return $field;
+    }
 }
