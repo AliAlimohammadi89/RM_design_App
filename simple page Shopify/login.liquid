@@ -1,0 +1,86 @@
+<!-- /templates/customers/login.liquid -->
+
+<div class="grid">
+
+  <div class="grid__item large--one-third push--large--one-third text-center">
+    <div class="note form-success" id="ResetSuccess" style="display:none;">
+      </CUSTOMER_LOGIN_RECOVER_PASSWORD>
+    </div>
+    <div id="CustomerLoginForm" class="form-vertical">
+     <CUSTOMER_LOGIN_FORM>
+              </CUSTOMER_LOGIN_ERROR>
+<div class="activated-all-all">
+    <div class="activated-all">
+        <div class="activated-header"></CUSTOMER_LOGIN_TITLE></div>
+     </CUSTOMER_LOGIN_ERROR>
+         <div class="activated-email-all">
+            <div class="activated-email-text"></CUSTOMER_LOGIN_EMAIL_TITLE></div>
+        <input type="email" name="customer[email]" id="CustomerEmail" class="input-full{% if form.errors contains 'email' %} error{% endif %}" placeholder="</CUSTOMER_LOGIN_EMAIL_TITLE>" autocorrect="off" autocapitalize="off" autofocus>
+        </div>
+              {% if form.password_needed %}
+        <div class="activated-password-all">
+            <div class="activated-password-text"></CUSTOMER_LOGIN_PASSWORD_TITLE></div>
+          <input type="password" value="" name="customer[password]" id="CustomerPassword" class="input-full{% if form.errors contains 'password' %} error{% endif %}" placeholder="</CUSTOMER_LOGIN_PASSWORD_TITLE>">
+        </div>
+              {% endif %}
+        <div class="activated-button" style="justify-content: flex-start;">
+          {% if form.password_needed %}
+          <div class="activated-button-btn-forgot"><a href="#recover"  id="RecoverPassword"></CUSTOMER_LOGIN_FORGET_PASSWORD_TITLE></a></div>
+        {% endif %}
+        </div>
+      <div class="activated-button">
+            <div class="activated-button-btn"><input type="submit"  style="font-weight: bold;font-size: 17px;cursor: pointer;border: none;background: none;"  class="btn btn--full" value="</CUSTOMER_LOGIN_SING_IN_TITLE>">
+</div>
+        <div style="margin-left: 2%;" class="activated-button-btn"><a href="/"></CUSTOMER_LOGIN_LOGIN_CANCEL_TITLE></a></div>
+        <div style="margin-left: 2%;" class="activated-button-btn"></CUSTOMER_LOGIN_CRETE_ACCOUNT_TITLE></div>
+        </div>
+    </div>
+</div>
+      </CUSTOMER_LOGIN_FORM>
+    </div>
+    
+    <div id="RecoverPasswordForm" style="display: none;">
+      
+       {% if form.posted_successfully? %}
+            {% assign resetPassword = true %}
+          {% endif %}
+      <div class="activated-all-all">
+    <div class="activated-all">
+        <div class="activated-header">{{ 'customer.recover_password.title' | t }}</div>
+        <div class="activated-text"></CUSTOMER_LOGIN_PASSWORD_SUB_TITLE></div>
+        <div class="activated-email-all">
+            <div class="activated-email-text"></CUSTOMER_LOGIN_RECOVER_EMAIL></div>
+          <input type="email" value="" name="email" id="RecoverEmail" class="input-full" placeholder="</CUSTOMER_LOGIN_RECOVER_EMAIL>" autocorrect="off" autocapitalize="off">
+        </div>
+       
+        <div class="activated-button">
+            <div class="activated-button-btn">
+            <input type="submit" class="btn btn--full" style="width: 125px;height: 100%;background-color: #e5bf44; " value="</CUSTOMER_LOGIN_RECOVER_PASSWORD_SUBMIT_TITLE>">
+               
+              
+              
+              <button type="button" style="width: 125px;height: 100%;background-color: #e5bf44;  " id="HideRecoverPasswordLink" class="text-link"></CUSTOMER_LOGIN_PASSWORD_CANCEL></button> 
+        </div>
+    </div>
+</div>
+
+      
+
+       
+ 
+    </div>
+
+    {% if shop.checkout.guest_login %}
+      <hr>
+
+      <h2></CUSTOMER_LOGIN_GUST_TITLE></h2>
+
+      {% form 'guest_login' %}
+        <input type="submit"  style="width: 100%;height: 100%;background: none;border: none;" class="btn" value="</CUSTOMER_LOGIN_GUST_CONTINUE_TITLE>">
+      </CUSTOMER_LOGIN_FORM>
+    {% endif %}
+
+  </div>
+
+</div>
+{% comment %} ---style---- {% endcomment %}

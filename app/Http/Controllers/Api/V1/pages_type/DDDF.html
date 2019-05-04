@@ -1,0 +1,305 @@
+<!-- /templates/customers/addressess.liquid -->
+{{ 'customers_addresses.css' | asset_url | stylesheet_tag }}
+
+{% comment %}
+
+Template note:
+- There are instances of inline JS below. Best practices advise separating this
+into an external JS file
+- There are separate 'add new' and 'edit' address forms
+
+{% endcomment %}
+
+<CUSTOMER_ADDRESS_ADDRESSE_PAGINATES>
+
+    <header class="section-header">
+        <h1 class="section-header__left"></CUSTOMER_ADDRESS_ACCOUNT_TITLE></h1>
+        <div class="section-header__right" style="display: flex;justify-content: center;">
+
+            <div class="create-button-btn" style="height: 30px;text-align: center;">
+                <a href="#" class="btn" style=" font-weight: bold;width: 100%;height: 100%;margin-top: 11px;text-decoration: none;" onclick="Shopify.CustomerAddress.toggleNewForm(); return false;"></CUSTOMER_ADDRESS_ADD_NEW></a>
+            </div>
+
+        </div>
+    </header>
+
+    <hr class="hr--small">
+
+    <div class="grid">
+        <div style="display: flex;justify-content: center;"  >
+
+            <div class="create-button-btn" style="width: 200px;height: 30px;text-align: center;">
+
+                <a class="btn" style="width: 100%; font-weight: bold; height: 100%;margin-top: 11px;text-decoration: navajowhite;" href="/account">
+                    </CUSTOMER_ADDRESS_ACCOUNT_RETURN></a>  </div>
+        </div>
+        <div class="grid__item two-thirds medium-down--one-whole">
+
+            {% comment %}
+            Add address form, hidden by default
+            {% endcomment %}
+            <CUSTOMER_ADDRESS_ADDRESSE_FORM>
+                <div id="AddAddress" class="form-vertical" style="display:none;margin: 0 25px;"{% endunless %}>
+                    </CUSTOMER_ADDRESS_ERROR_FORM>
+
+
+                    <div class="create-all-all" style="margin-bottom: 10%;">
+                        <div class="create-all">
+                            <div class="create-header"></CUSTOMER_ADDRESS_ADD_NEW></div>
+                            <div class="create-email-all">
+                                <label for="AddressFirstNameNew" class="create-email-text"></CUSTOMER_ADDRESS_FIRST_NAME_TITLE></label>
+                                <input type="text" id="AddressFirstNameNew" class="input-full" name="address[first_name]" value="</CUSTOMER_ADDRESS_FIRST_NAME_FORM_VALUE>" autocapitalize="words">
+                            </div>
+
+                            <div class="create-email-all">
+                                <label for="AddressLastNameNew" class="create-email-text"></CUSTOMER_ADDRESS_LAST_NAME_TITLE></label>
+                                <input type="text" id="AddressLastNameNew" class="input-full" name="address[last_name]" value="</CUSTOMER_ADDRESS_LAST_NAME_FORM_VALUE>" autocapitalize="words">
+                            </div>
+
+                            <div class="create-email-all">
+
+                                <label for="AddressCompanyNew" class="create-email-text"></CUSTOMER_ADDRESS_COMPANY_TITLE></label>
+                                <input type="text" id="AddressCompanyNew" class="input-full" name="address[company]" value="</CUSTOMER_ADDRESS_COMPANY_FORM_VALUE>" autocapitalize="words">
+                            </div>
+                            <div class="create-email-all">
+
+                                <label class="create-email-text" for="AddressAddress1New"></CUSTOMER_ADDRESS_ADDRESS1_TITLE></label>
+                                <input type="text" id="AddressAddress1New" class="input-full" name="address[address1]" value="</CUSTOMER_ADDRESS_ADDRESS1_FORM_VALUE>" autocapitalize="words">
+                            </div>
+                            <div class="create-email-all">
+                                <label class="create-email-text" for="AddressAddress2New"></CUSTOMER_ADDRESS_ADDRESS2_TITLE></label>
+                                <input type="text" id="AddressAddress2New" class="input-full" name="address[address2]" value="</CUSTOMER_ADDRESS_ADDRESS2_FORM_VALUE>" autocapitalize="words">
+                            </div>
+                            <div class="create-email-all">
+                                <div class="grid">
+                                    <div class="grid__item large--one-half">
+                                        <label class="create-email-text" for="AddressCityNew"></CUSTOMER_ADDRESS_CITY_TITLE></label>
+                                        <input type="text" id="AddressCityNew" class="input-full" name="address[city]" value="</CUSTOMER_ADDRESS_CITY_FORM_VALUE>" autocapitalize="words">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="create-email-all">
+                                <div class="grid__item large--one-half">
+                                    <label class="create-email-text" for="AddressCountryNew"></CUSTOMER_ADDRESS_COUNTRY_TITLE></label>
+                                    <select id="AddressCountryNew" class="input-full" name="address[country]" data-default="</CUSTOMER_ADDRESS_FORM_CONTRY>"></CUSTOMER_ADDRESS_OPTION_TAGS></select>
+                                </div>
+                            </div>
+                            <div  class="create-email-all">
+                                <div class="grid__item" id="AddressProvinceContainerNew" style="display:none">
+                                    <label class="create-email-text" for="AddressProvinceNew"></CUSTOMER_ADDRESS_PROVINCE_TITLE></label>
+                                    <select id="AddressProvinceNew" class="input-full" name="address[province]" data-default="</CUSTOMER_ADDRESS_FORM_PROVINCE_VALUE>"></select>
+                                </div>
+                            </div>
+                            <div class="create-email-all">
+                                <div class="grid__item large--one-half">
+                                    <label class="create-email-text" for="AddressZipNew"></CUSTOMER_ADDRESS_ZIP></label>
+                                    <input type="text" id="AddressZipNew" class="input-full" name="address[zip]" value="</CUSTOMER_ADDRESS_FORM_ZIP>" autocapitalize="characters">
+                                </div>
+                            </div>
+                            <div class="create-email-all">
+                                <div class="grid__item large--one-half">
+                                    <label class="create-email-text" for="AddressPhoneNew"><CUSTOMER_ADDRESS_PHONE_TITLE></label>
+                                    <input type="tel" id="AddressPhoneNew" class="input-full" name="address[phone]" value="<CUSTOMER_ADDRESS_FORM_PHONE>">
+                                </div>
+                            </div>
+                            <div class="bt-submit">
+                                <div class="bt-submit-check">
+
+                                    <label   for="address_default_address_new" class="inline"><CUSTOMER_ADDRESS_SET_DEFAULT_TITLE>}</label>
+                                    <CUSTOMER_ADDRESS_SET_AS_DEFAULT_ADDRESS>
+                                </div>
+
+                                <div style="margin-top: 6%;display: flex;justify-content: space-between;" >
+                                    <div class="create-button" style="width: unset;">
+                                        <div class="create-button-btn" style="margin-right: 15px;width: 125px;height: 25px;">
+                                            <input type="submit" style="width: 100%;height: 100%;background: none;border: none;cursor: pointer;text-align: center;font-weight: bold;" class="btn" value="<CUSTOMER_ADDRESS_ADD_TITLE>"></div>
+                                    </div>
+                                    <div class="create-button" style="width: unset;">
+                                        <div class="create-button-btn" style="cursor: pointer;width: 125px;height: 25px;">
+                                            <input type="buttom" style="width: 100%;height: 100%;background: none;border: none;cursor: pointer;text-align: center;font-weight: bold;" onclick="Shopify.CustomerAddress.toggleNewForm(); return false;" class="btn" value="<CUSTOMER_ADDRESS_CANCEL>"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+                </ENDFOR>
+
+                <h2><CUSTOMER_ADDRESS_TITLE_TITLE></h2>
+
+                {% comment %}
+                List all customer addresses with a unique edit form.
+                Also add pagination in case they have a large number of addresses
+                {% endcomment %}
+                <div class="acc-address-all-all"  >
+
+                    <div class="acc-address-all">
+                        <div class="acc-address-header">Account&nbsp;<strong> Addresses</strong></div>
+                        <div class="acc-address-main">
+                            '<CUSTOMER_ADDRESS_ADDRESSES>'
+                            <div class="acc-address-main-address " >
+                                <div class="acc-address-main-actions">
+                                    <div class="acc-address-main-actions-edit">  <CUSTOMER_ADDRESS_ADDRESSE_EDIT></div>
+                                    <div class="acc-address-main-actions-delete"><CUSTOMER_ADDRESS_ADDRESSE_DELETE></div>
+                                </div>
+                                <div class="acc-address-main-address-header"> </div>
+                                <div class="acc-address-main-address-mail"></div>
+                                <div class="acc-address-main-address-address">
+                                    <div><CUSTOMER_ADDRESS_ADDRESSE_COMPANY></div>
+                                    <div><CUSTOMER_ADDRESS_ADDRESSE_STREET></div>
+                                    <div><CUSTOMER_ADDRESS_ADDRESSE_CITY></div>
+                                    <div>  <CUSTOMER_ADDRESS_ADDRESSE_PROVINCE_CODE>
+                                    </div>
+                                </div>
+                                <div> <CUSTOMER_ADDRESS_ADDRESSE_COUNTRY></div>
+                                <div> <CUSTOMER_ADDRESS_ADDRESSE_PHONE></div>
+                                <div> <CUSTOMER_ADDRESS_ADDRESSE_CITY></div>
+                            </div>
+                            </CUSTOMER_ADDRESS_CUSTOMER_ADDRESSES>
+                            <div id="EditAddress_</CUSTOMER_ADDRESS_CUSTOMER_ADDRESS_ID>" class="form-vertical" >
+                                <div class="create-all-all "  style="overflow-x: hidden;overflow-y: auto;width: 577px" >
+                                    <div class="create-all">
+                                        <div class="acc-address-main-address"  style="width: 100%;height: 693px ;width: calc(100% - 62px);margin-left: 13px;padding: 20px;">
+                                            <h4></CUSTOMER_ADDRESS_EDIT_DEFAULT_TITLE></h4>
+                                            </CUSTOMER_ADDRESS_ERROR_FORM>
+
+                                            <div class="create-email-all">
+                                                <label class="create-email-text" for="AddressFirstName_<CUSTOMER_ADDRESS_FORM_ID>"></CUSTOMER_ADDRESS_FIRST_NAME_TITLE></label>
+                                                <input type="text" id="AddressFirstName_<CUSTOMER_ADDRESS_FORM_ID>" class="input-full" name="address[first_name]" value="</CUSTOMER_ADDRESS_FIRST_NAME_FORM_VALUE>" autocapitalize="words">
+                                            </div>
+
+                                            <div class="create-email-all">
+                                                <label class="create-email-text" for="AddressLastName_<CUSTOMER_ADDRESS_FORM_ID>"></CUSTOMER_ADDRESS_LAST_NAME_TITLE></label>
+                                                <input type="text" id="AddressLastName_<CUSTOMER_ADDRESS_FORM_ID>" class="input-full" name="address[last_name]" value="</CUSTOMER_ADDRESS_LAST_NAME_FORM_VALUE>" autocapitalize="words">
+                                            </div>
+                                            <div class="create-email-all">
+
+                                                <label  class="create-email-text" for="AddressCompany_<CUSTOMER_ADDRESS_FORM_ID>"></CUSTOMER_ADDRESS_COMPANY_TITLE></label>
+                                                <input type="text" id="AddressCompany_<CUSTOMER_ADDRESS_FORM_ID>" class="input-full" name="address[company]" value="</CUSTOMER_ADDRESS_COMPANY_FORM_VALUE>" autocapitalize="words">
+                                            </div>
+                                            <div class="create-email-all">
+                                                <label class="create-email-text" for="AddressAddress1_<CUSTOMER_ADDRESS_FORM_ID>"></CUSTOMER_ADDRESS_ADDRESS1_TITLE></label>
+                                                <input type="text" id="AddressAddress1_<CUSTOMER_ADDRESS_FORM_ID>" class="input-full" name="address[address1]" value="</CUSTOMER_ADDRESS_ADDRESS1_FORM_VALUE>" autocapitalize="words">
+                                            </div>
+                                            <div class="create-email-all">
+
+                                                <label class="create-email-text" for="AddressAddress2_<CUSTOMER_ADDRESS_FORM_ID>"></CUSTOMER_ADDRESS_ADDRESS2_TITLE></label>
+                                                <input type="text" id="AddressAddress2_<CUSTOMER_ADDRESS_FORM_ID>" class="input-full" name="address[address2]" value="</CUSTOMER_ADDRESS_ADDRESS2_FORM_VALUE>" autocapitalize="words">
+                                            </div>
+
+                                            <div class="create-email-all">
+                                                <label class="create-email-text" for="AddressCity_<CUSTOMER_ADDRESS_FORM_ID>"></CUSTOMER_ADDRESS_CITY_TITLE></label>
+                                                <input type="text" id="AddressCity_<CUSTOMER_ADDRESS_FORM_ID>" class="input-full" name="address[city]" value="</CUSTOMER_ADDRESS_CITY_FORM_VALUE>" autocapitalize="words">
+                                            </div>
+                                            <div class="create-email-all">
+                                                <label class="create-email-text" for="AddressCountry_<CUSTOMER_ADDRESS_FORM_ID>"></CUSTOMER_ADDRESS_COUNTRY_TITLE></label>
+                                                <select id="AddressCountry_<CUSTOMER_ADDRESS_FORM_ID>" class="input-full" name="address[country]" data-default="</CUSTOMER_ADDRESS_FORM_COUNTRY>"></CUSTOMER_ADDRESS_OPTION_TAGS></select>
+                                            </div>
+                                            <div class="create-email-all">
+                                                <div id="AddressProvinceContainer_<CUSTOMER_ADDRESS_FORM_ID>" style="display:none">
+                                                    <label class="create-email-text" for="AddressProvince_<CUSTOMER_ADDRESS_FORM_ID>"><CUSTOMER_ADDRESS_PROVINCE_TITLE></label>
+                                                    <select id="AddressProvince_<CUSTOMER_ADDRESS_FORM_ID>" class="input-full" name="address[province]" data-default="<CUSTOMER_ADDRESS_FORM_PROVINCE_VALUE>"></select>
+                                                </div>
+                                            </div>
+                                            <div class="create-email-all">
+                                                <div class="grid__item one-half small--one-whole">
+                                                    <label class="create-email-text" for="AddressZip_<CUSTOMER_ADDRESS_FORM_ID>"><CUSTOMER_ADDRESS_ZIP></label>
+                                                    <input type="text" id="AddressZip_<CUSTOMER_ADDRESS_FORM_ID>" class="input-full" name="address[zip]" value="<CUSTOMER_ADDRESS_FORM_ZIP>" autocapitalize="characters">
+                                                </div>
+                                                <div class="create-email-all">
+                                                    <div class="grid__item one-half small--one-whole">
+                                                        <label  for="AddressPhone_<CUSTOMER_ADDRESS_FORM_ID>"><CUSTOMER_ADDRESS_PHONE_TITLE></label>
+                                                        <input type="tel" id="AddressPhone_<CUSTOMER_ADDRESS_FORM_ID>" class="input-full" name="address[phone]" value="<CUSTOMER_ADDRESS_FORM_PHONE>">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="create-email-all">
+                                                <div class="create-email-text" >
+                                                    <input type="submit" style=" margin-right: 50px;font-weight: bold;width: 100%;height: 100%;margin-top: 11px;text-decoration: navajowhite;background-color: #e5bf44;border: none;display: flex;justify-content: center;align-items: center;cursor: pointer;"   value="</CUSTOMER_ADDRESS_CUSTOMER_ADDRESS_UPDATE_TITLE>" >
+                                                    <input type="button" style=" font-weight: bold;width: 100%;height: 100%;margin-top: 11px;text-decoration: navajowhite;background-color: #e5bf44;border: none;display: flex;justify-content: center;align-items: center;cursor: pointer;" onclick="Shopify.CustomerAddress.toggleForm(<CUSTOMER_ADDRESS_FORM_ID>); return false;"   value="<CUSTOMER_ADDRESS_CANCEL>" >
+                                                </div>
+                                            </div>
+
+                                            <div class="create-email-all">
+                                                <div class="create-email-text">
+
+                                                    <label for="address_default_address_<CUSTOMER_ADDRESS_FORM_ID>" class="inline"><CUSTOMER_ADDRESS_SET_DEFAULT_TITLE> <CUSTOMER_ADDRESS_SET_AS_DEFAULT_ADDRESS></label>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </END_FORM>
+
+
+
+
+                            </ENDFOR>
+                        </div>
+                    </div>
+                </div>
+
+                </CUSTOMER_ADDRESS_PAGINATE_IF>
+                <hr>
+                <div class="pagination">
+                    </CUSTOMER_ADDRESS_PAGINATE>
+                </div>
+                </ENDIF>
+        </div>
+
+    </div>
+
+    <script>
+        // Initialize observers on address selectors
+        new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
+            hideElement: 'AddressProvinceContainerNew'
+        });
+
+        // Setup province selector on each customer address
+        {% paginate customer.addresses by 5 %}
+        '<CUSTOMER_ADDRESS_ADDRESSES>'
+        new Shopify.CountryProvinceSelector('AddressCountry_</CUSTOMER_ADDRESS_CUSTOMER_ADDRESS_ID>', 'AddressProvince_</CUSTOMER_ADDRESS_CUSTOMER_ADDRESS_ID>', {
+            hideElement: 'AddressProvinceContainer_</CUSTOMER_ADDRESS_CUSTOMER_ADDRESS_ID>'}
+        );
+        {% endfor %}
+        {% endpaginate %}
+
+        // Modified contents of customer_area.js (global asset)
+        Shopify.CustomerAddress = {
+            toggleForm: function(id) {
+                var editEl = document.getElementById('EditAddress_'+id);
+                editEl.style.display = editEl.style.display == 'none' ? '' : 'none';
+                return false;
+            },
+
+            toggleNewForm: function() {
+                var el = document.getElementById('AddAddress');
+                el.style.display = el.style.display == 'none' ? '' : 'none';
+                return false;
+            },
+
+            destroy: function(id, confirm_msg) {
+                if (confirm(confirm_msg || "Are you sure you wish to delete this address?")) {
+                    Shopify.postLink('/account/addresses/'+id, {'parameters': {'_method': 'delete'}});
+                }
+            }
+        }
+    </script>
+
+    {% endpaginate %}
+
+
+    <style>
+    </style>
+

@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b12a53cd-8db7-4c39-a227-74280c5d64da" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/DDDF.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/ShopifyPageType.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/ShopifyPageType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/theme creator.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/theme creator.xlsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,21 +30,21 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="191" />
-          <entry key="php" value="9175" />
+          <entry key="php" value="10895" />
           <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="192" />
-          <entry key="PHP" value="9174" />
+          <entry key="PHP" value="10894" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="artisan" value="1" />
-          <entry key="html" value="3" />
+          <entry key="html" value="4" />
           <entry key="json" value="1" />
           <entry key="liquid" value="1" />
           <entry key="php" value="58" />
@@ -52,7 +54,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="3" />
+          <entry key="HTML" value="4" />
           <entry key="JSON" value="1" />
           <entry key="PHP" value="59" />
           <entry key="PLAIN_TEXT" value="2" />
@@ -88,30 +90,27 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/ShopifyPageType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="171" column="35" lean-forward="true" selection-start-line="171" selection-start-column="35" selection-end-line="171" selection-end-column="35" />
+            <state relative-caret-position="70">
+              <caret line="255" column="34" selection-start-line="255" selection-start-column="20" selection-end-line="255" selection-end-column="34" />
               <folding>
                 <element signature="e#143#2727#0#PHP" />
                 <element signature="e#199#2697#0#PHP" />
                 <element signature="e#2733#3050#0#PHP" />
                 <element signature="e#2782#3020#0#PHP" />
                 <element signature="e#3056#4766#0#PHP" />
-                <element signature="e#3109#4759#0#PHP" />
                 <element signature="e#4772#5584#0#PHP" />
-                <element signature="e#4822#5554#0#PHP" />
                 <element signature="e#5590#8355#0#PHP" />
                 <element signature="e#5640#8325#0#PHP" />
                 <element signature="e#8361#10792#0#PHP" />
                 <element signature="e#8419#10762#0#PHP" />
-                <element signature="e#10798#12615#0#PHP" />
-                <element signature="e#12621#13627#0#PHP" />
-                <element signature="e#12686#13597#0#PHP" />
-                <element signature="e#13632#15324#0#PHP" />
-                <element signature="e#15344#22059#0#PHP" />
-                <element signature="e#15386#20394#0#PHP" />
-                <element signature="e#22058#28780#0#PHP" />
-                <element signature="e#22117#23559#0#PHP" />
-                <element signature="e#25085#25371#0#PHP" />
+                <element signature="e#15205#16116#0#PHP" />
+                <element signature="e#17850#24572#0#PHP" />
+                <element signature="e#17906#24542#0#PHP" />
+                <element signature="e#24578#27599#0#PHP" />
+                <element signature="e#24637#27569#0#PHP" />
+                <element signature="e#27605#28552#0#PHP" />
+                <element signature="e#29453#30749#0#PHP" />
+                <element signature="e#31173#32887#0#PHP" />
               </folding>
             </state>
           </provider>
@@ -141,8 +140,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/ConvertHtml.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+            <state relative-caret-position="265">
+              <caret line="58" selection-start-line="58" selection-end-line="58" />
             </state>
           </provider>
         </entry>
@@ -186,9 +185,15 @@
       <find>shipping_method in order.shipping_methods</find>
       <find>CUSTOMER_ORDER_TAX_TOTAL_PRICE</find>
       <find>{% if form.first_name %}</find>
+      <find>{{ 'customer.account.return' | t }}</find>
+      <find>{{ 'customer.account.title' | t }}</find>
+      <find>{% if paginate.pages &gt; 1 %}</find>
+      <find>CUSTOMER_ADDRESS_ADDRESSE_CITY</find>
+      <find>endpa</find>
     </findStrings>
     <replaceStrings>
       <replace>$page</replace>
+      <replace>'&lt;/CUSTOMER_ADDRESS</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -220,6 +225,7 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/V1/ConvertHtmlToLiquidController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/V1/ConvertHtmlToB2CStoreController.php" />
         <option value="$PROJECT_DIR$/routes/api.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/DDDF.html" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/ConvertHtml.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/ShopifyPageType.php" />
       </list>
@@ -321,7 +327,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
-    <option name="width" value="990" />
+    <option name="width" value="920" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -454,24 +460,24 @@
       <workItem from="1556345055421" duration="79332000" />
       <workItem from="1556628569184" duration="597000" />
       <workItem from="1556710179549" duration="779000" />
-      <workItem from="1556711274238" duration="20920000" />
+      <workItem from="1556711274238" duration="40780000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101628000" />
+    <option name="totallyTimeSpent" value="121488000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="990" height="1047" extended-state="0" />
+    <frame x="-7" y="0" width="920" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="npm" order="0" sideWeight="0.50054765" side_tool="true" weight="0.43595505" />
       <window_info id="Structure" order="1" sideWeight="0.50054765" side_tool="true" weight="0.43595505" />
       <window_info id="Favorites" order="2" sideWeight="0.50054765" side_tool="true" weight="0.43595505" />
-      <window_info content_ui="combo" id="Project" order="3" sideWeight="0.49945235" weight="0.41127348" />
+      <window_info content_ui="combo" id="Project" order="3" sideWeight="0.49945235" weight="0.41028446" />
       <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.4968017" weight="0.33296824" />
       <window_info anchor="bottom" id="Database Changes" order="1" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50319827" side_tool="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50319827" side_tool="true" weight="0.32968238" />
       <window_info anchor="bottom" id="Version Control" order="3" weight="0.329718" />
       <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="5" />
@@ -490,7 +496,7 @@
       <window_info id="npm" order="0" sideWeight="0.50054765" side_tool="true" weight="0.43595505" />
       <window_info id="Structure" order="1" sideWeight="0.50054765" side_tool="true" weight="0.43595505" />
       <window_info id="Favorites" order="2" sideWeight="0.50054765" side_tool="true" weight="0.43595505" />
-      <window_info active="true" content_ui="combo" id="Project" order="3" sideWeight="0.49945235" visible="true" weight="0.41127348" />
+      <window_info active="true" content_ui="combo" id="Project" order="3" sideWeight="0.49945235" visible="true" weight="0.41028446" />
       <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.4968017" weight="0.33296824" />
       <window_info anchor="bottom" id="Database Changes" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50319827" side_tool="true" weight="0.329718" />
@@ -704,39 +710,67 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/DDDF.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2815">
+          <caret line="305" lean-forward="true" selection-start-line="305" selection-end-line="305" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#header#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#header#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#header#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_FORM#0;n#div#1;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_FORM#0;n#div#1;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#8;n#div#0;n#div#0;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_FORM#0;n#div#1;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#11;n#div#0;n#div#0;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_FORM#0;n#div#1;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#11;n#div#0;n#div#0;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_FORM#0;n#div#1;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#11;n#div#0;n#div#0;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_FORM#0;n#div#1;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#1;n#div#11;n#div#0;n#div#0;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_FORM#0;n#div#1;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#11;n#div#0;n#div#0;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_FORM#0;n#div#1;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#11;n#div#0;n#div#0;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_FORM#0;n#div#1;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#1;n#div#1;n#div#11;n#div#0;n#div#0;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_FORM#0;n#div#1;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="e#8940#8946#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#CUSTOMER_ADDRESS_ADDRESSES#0;n#div#1;n#div#0;n#div#1;n#CUSTOMER_ADDRESS_ADDRESSE_FORM#0;n#div#1;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#CUSTOMER_ADDRESS_ADDRESSES#0;n#div#1;n#div#0;n#div#1;n#CUSTOMER_ADDRESS_ADDRESSE_FORM#0;n#div#1;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#7;n#div#0;n#div#0;n#div#0;n#div#1;n#CUSTOMER_ADDRESS_ADDRESSES#0;n#div#1;n#div#0;n#div#1;n#CUSTOMER_ADDRESS_ADDRESSE_FORM#0;n#div#1;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#9;n#div#0;n#div#0;n#div#0;n#div#1;n#CUSTOMER_ADDRESS_ADDRESSES#0;n#div#1;n#div#0;n#div#1;n#CUSTOMER_ADDRESS_ADDRESSE_FORM#0;n#div#1;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#1;n#div#0;n#div#9;n#div#0;n#div#0;n#div#0;n#div#1;n#CUSTOMER_ADDRESS_ADDRESSES#0;n#div#1;n#div#0;n#div#1;n#CUSTOMER_ADDRESS_ADDRESSE_FORM#0;n#div#1;n#div#0;n#CUSTOMER_ADDRESS_ADDRESSE_PAGINATES#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/ConvertHtml.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+        <state relative-caret-position="265">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/V1/pages_type/ShopifyPageType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="171" column="35" lean-forward="true" selection-start-line="171" selection-start-column="35" selection-end-line="171" selection-end-column="35" />
+        <state relative-caret-position="70">
+          <caret line="255" column="34" selection-start-line="255" selection-start-column="20" selection-end-line="255" selection-end-column="34" />
           <folding>
             <element signature="e#143#2727#0#PHP" />
             <element signature="e#199#2697#0#PHP" />
             <element signature="e#2733#3050#0#PHP" />
             <element signature="e#2782#3020#0#PHP" />
             <element signature="e#3056#4766#0#PHP" />
-            <element signature="e#3109#4759#0#PHP" />
             <element signature="e#4772#5584#0#PHP" />
-            <element signature="e#4822#5554#0#PHP" />
             <element signature="e#5590#8355#0#PHP" />
             <element signature="e#5640#8325#0#PHP" />
             <element signature="e#8361#10792#0#PHP" />
             <element signature="e#8419#10762#0#PHP" />
-            <element signature="e#10798#12615#0#PHP" />
-            <element signature="e#12621#13627#0#PHP" />
-            <element signature="e#12686#13597#0#PHP" />
-            <element signature="e#13632#15324#0#PHP" />
-            <element signature="e#15344#22059#0#PHP" />
-            <element signature="e#15386#20394#0#PHP" />
-            <element signature="e#22058#28780#0#PHP" />
-            <element signature="e#22117#23559#0#PHP" />
-            <element signature="e#25085#25371#0#PHP" />
+            <element signature="e#15205#16116#0#PHP" />
+            <element signature="e#17850#24572#0#PHP" />
+            <element signature="e#17906#24542#0#PHP" />
+            <element signature="e#24578#27599#0#PHP" />
+            <element signature="e#24637#27569#0#PHP" />
+            <element signature="e#27605#28552#0#PHP" />
+            <element signature="e#29453#30749#0#PHP" />
+            <element signature="e#31173#32887#0#PHP" />
           </folding>
         </state>
       </provider>
