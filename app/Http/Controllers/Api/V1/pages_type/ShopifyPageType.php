@@ -3,9 +3,72 @@
 namespace App\Http\Controllers\Api\V1\pages_type;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Convert_html;
 
-class ShopifyPageType extends Controller
+class ShopifyPageType extends Controller implements Convert_html
 {
+    public $items_field;
+
+    public function __construct($page)
+    {
+        switch ($page) {
+            case 'collectionPage':
+                $fields = $this->collectionPage();
+                break;
+            case 'page404':
+                $fields = $this->page404();
+                break;
+            case 'articlePage':
+                $fields = $this->articlePage();
+                break;
+            case 'blogPage':
+                $fields = $this->blogPage();
+                break;
+            case 'cartPage':
+                $fields = $this->cartPage();
+                break;
+            case 'customerAccount':
+                $fields = $this->customer_account();
+                break;
+            case 'customerActiveAccount':
+                $fields = $this->customer_active_account();
+                break;
+            case 'CustomerLogin':
+                $fields = $this->customer_login();
+                break;
+            case 'customerAddress':
+                $fields = $this->customer_address();
+                break;
+            case 'customerOrder':
+                $fields = $this->customer_order();
+                break;
+            case 'customerRegister':
+                $fields = $this->customer_register();
+                break;
+            case 'customerResetPassword':
+                $fields = $this->customer_reset_password();
+                break;
+            case 'collectionList':
+                $fields = $this->collection_list();
+                break;
+            case 'pageContact':
+                $fields = $this->page_contact();
+                break;
+            case 'pageSearch':
+                $fields = $this->page_search();
+                break;
+            case 'pageProduct':
+                $fields = $this->page_product();
+                break;
+            default:
+                return 'no_page_find';
+                break;
+        }
+
+
+        $this->items_field = $fields;
+    }
+
     public function collectionPage()
     {
         $field = [
@@ -59,7 +122,6 @@ class ShopifyPageType extends Controller
             '<ARTICLE_COMMENT_ID>' => "{{ comment.id }}",
             '<ARTICLE_COMMENT_AUTHOR>' => "{{ comment.author }}",
             '<ARTICLE_COMMENT_CREATE_AT>' => "{{ comment.created_at | date: format: 'month_day_year' }}",
-            '<ARTICLE_COMMENTS>' => "{% for comment in article.comments by 5 %}",
             '</ARTICLE_COMMENTS>' => "{% endfor %}",
             '</ARTICLE_PAGINATE>' => "{{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}",
             '<ARTICLE_FORM_COMMENT>' => "{% form 'new_comment', article %}",
@@ -80,21 +142,21 @@ class ShopifyPageType extends Controller
 
 
         ];
+        return $field;
     }
 
     public function blogPage()
     {
         $field = [
             '<ARTICLE_TITLE>' => "{{article.title}}",
+            '<BLOG_PAGINATE>' => "  {% if paginate.pages > 1 %} {{ paginate | default_pagination }} {% endif %} ",
             '<BLOGS>' => "{% for article in blog.articles %}",
             '</BLOGS>' => "{% endfor %}",
-
             '<BLOG_URL>' => "{{ article.url }}",
             '<BLOG_TITLE>' => "{{ article.title }}",
             '<BLOG_IMAGE>' => "{{ article | img_url: '1024x1024' | img_tag: article.title }}",
-            '<BLOG_PUBLISED_AT>' => "{{ article | img_url: '1024x1024' | img_tag: article.title }}",
+            '<BLOG_PUBLISED_AT>' => "{{ article.published_at | date: '%Y-%m-%d' }}",
             '<BLOG_CONTENT>' => "{{ article.content | strip_html | truncatewords: 50 }}",
-            '<BLOG_PAGINATE>' => "  {% if paginate.pages > 1 %} {{ paginate | default_pagination }} {% endif %} ",
             '</BLOG_PAGINATES>' => " {% endpaginate %} ",
         ];
         return $field;
@@ -146,6 +208,7 @@ class ShopifyPageType extends Controller
     public function customer_account()
     {
         $field = [
+            '</FOR_INDEX>' => "{{forloop.index}}",
             '</CUSTOMER_ACCOUNT_TITLE>' => "{{ 'customer.account.title' | t }}",
             '</CUSTOMER_ACCOUNT_ORDER_TITLE>' => "{{ 'customer.orders.title' | t }}",
             '</CUSTOMER_ACCOUNT_PAYMENT_STATUS_TITLE>' => "{{ 'customer.orders.payment_status' | t }}",
@@ -172,6 +235,48 @@ class ShopifyPageType extends Controller
             '</CUSTOMER_DEFAULT_ADDRESS_COUNTRY>' => "{{ customer.default_address.country }}  ",
             '</CUSTOMER_DEFAULT_ADDRESS_PHONE>' => " {{ customer.default_address.phone }}",
             '</CUSTOMER_ACCOUNT_ADDRESS_PAGE>' => "{{ 'customer.account.view_addresses' | t }} ",
+        ];
+        return $field;
+    }
+
+    public function customer_active_account()
+    {
+        $field = [
+            '</CUSTOMER_ACTIVE_ACCOUNT_TITLE>' => " {{ 'customer.activate_account.title' | t }} ",
+            '</CUSTOMER_ACTIVE_ACCOUNT_SUBTEXT>' => " {{ 'customer.activate_account.subtext' | t }} ",
+            '<CUSTOMER_ACTIVE_ACCOUNT_FORM>' => "  {% form 'activate_customer_password' %} ",
+            '</CUSTOMER_ACTIVE_ACCOUNT_PASSWORD_TEXT>' => " {{ 'customer.activate_account.password' | t }}",
+            '</CUSTOMER_ACTIVE_ACCOUNT_PASSWORD_CONFIRM_TEXT>' => " {{ 'customer.activate_account.password_confirm' | t }} ",
+            '</CUSTOMER_ACTIVE_ACCOUNT_SUBMIT_TEXT>' => "{{ 'customer.activate_account.submit' | t }} ",
+            '</CUSTOMER_ACTIVE_ACCOUNT_CANCEL_TEXT>' => "{{ 'customer.activate_account.cancel' | t }} ",
+            '</CUSTOMER_ACTIVE_ACCOUNT_ERROR>' => "  {{ form.errors | default_errors }} ",
+            '</CUSTOMER_ACTIVE_ACCOUNT_FORM>' => " {% endform %} ",
+            '</FOR_INDEX>' => "{{forloop.index}}",
+        ];
+        return $field;
+    }
+
+    public function customer_login()
+    {
+        $field = [
+            '</CUSTOMER_LOGIN_RECOVER_PASSWORD>' => " {{ 'customer.recover_password.success' | t }} ",
+            '<CUSTOMER_LOGIN_FORM>' => "  {% form 'customer_login' %} ",
+            '</CUSTOMER_LOGIN_ERROR>' => " {{ form.errors | default_errors }} ",
+            '</CUSTOMER_LOGIN_TITLE>' => " {{ 'customer.login.title' | t }} ",
+            '</CUSTOMER_LOGIN_EMAIL_TITLE>' => " {{ 'customer.login.email' | t }} ",
+            '</CUSTOMER_LOGIN_PASSWORD_TITLE>' => " {{ 'customer.login.password' | t }} ",
+            '</CUSTOMER_LOGIN_FORGET_PASSWORD_TITLE>' => " {{ 'customer.login.forgot_password' | t }} ",
+            '</CUSTOMER_LOGIN_SING_IN_TITLE>' => " {{ 'customer.login.sign_in' | t }} ",
+            '</CUSTOMER_LOGIN_LOGIN_CANCEL_TITLE>' => " {{ 'customer.login.cancel' | t }} ",
+            '</CUSTOMER_LOGIN_CRETE_ACCOUNT_TITLE>' => " {{ 'layout.customer.create_account' | t | customer_register_link }} ",
+            '</CUSTOMER_LOGIN_PASSWORD_SUB_TITLE>' => " {{ 'customer.recover_password.subtext' | t }} ",
+            '</CUSTOMER_LOGIN_RECOVER_EMAIL>' => " {{ 'customer.recover_password.email' | t }} ",
+            '</CUSTOMER_LOGIN_RECOVER_PASSWORD_SUBMIT_TITLE>' => " {{ 'customer.recover_password.submit' | t }} ",
+            '</CUSTOMER_LOGIN_PASSWORD_CANCEL>' => " {{ 'customer.recover_password.cancel' | t }} ",
+            '</CUSTOMER_LOGIN_GUST_TITLE>' => " {{ 'customer.login.guest_title' | t }} ",
+            '</CUSTOMER_LOGIN_GUST_CONTINUE_TITLE>' => " {{ 'customer.login.guest_continue' | t }} ",
+            '</CUSTOMER_LOGIN_FORM>' => "{% endform %}",
+            '</FOR_INDEX>' => "{{forloop.index}}",
         ];
         return $field;
     }
@@ -226,53 +331,13 @@ class ShopifyPageType extends Controller
             '</CUSTOMER_ADDRESS_CUSTOMER_ADDRESSES>' => "{% form  'customer_address', address %}",
             '</CUSTOMER_ADDRESS_CUSTOMER_ADDRESS_ID>' => "{{ address.id }}",
             '</CUSTOMER_ADDRESS_CUSTOMER_ADDRESS_UPDATE_TITLE>' => "{{ 'customer.addresses.update' | t }}",
-            '</CUSTOMER_ADDRESS_CUSTOMER_ADDRESS_ID>' => "{{ address.id }}",
             '</CUSTOMER_ADDRESS_PAGINATE_IF>' => "{% if paginate.pages > 1 %}",
             '</CUSTOMER_ADDRESS_PAGINATE>' => "{{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}",
             '</ENDIF>' => "{% endif %}  ",
             '</END_FORM>' => "{% endif %}  ",
             '</ENDFOR>' => "{% endfor %}  ",
+            '</FOR_INDEX>' => "{{forloop.index}}",
 
-        ];
-        return $field;
-    }
-
-    public function customer_active_account()
-    {
-        $field = [
-            '</CUSTOMER_ACTIVE_ACCOUNT_TITLE>' => " {{ 'customer.activate_account.title' | t }} ",
-            '</CUSTOMER_ACTIVE_ACCOUNT_SUBTEXT>' => " {{ 'customer.activate_account.subtext' | t }} ",
-            '<CUSTOMER_ACTIVE_ACCOUNT_FORM>' => "  {% form 'activate_customer_password' %} ",
-            '</CUSTOMER_ACTIVE_ACCOUNT_PASSWORD_TEXT>' => " {{ 'customer.activate_account.password' | t }}",
-            '</CUSTOMER_ACTIVE_ACCOUNT_PASSWORD_CONFIRM_TEXT>' => " {{ 'customer.activate_account.password_confirm' | t }} ",
-            '</CUSTOMER_ACTIVE_ACCOUNT_SUBMIT_TEXT>' => "{{ 'customer.activate_account.submit' | t }} ",
-            '</CUSTOMER_ACTIVE_ACCOUNT_CANCEL_TEXT>' => "{{ 'customer.activate_account.cancel' | t }} ",
-            '</CUSTOMER_ACTIVE_ACCOUNT_ERROR>' => "  {{ form.errors | default_errors }} ",
-            '</CUSTOMER_ACTIVE_ACCOUNT_FORM>' => " {% endform %} ",
-        ];
-        return $field;
-    }
-
-    public function customer_login()
-    {
-        $field = [
-            '</CUSTOMER_LOGIN_RECOVER_PASSWORD>' => " {{ 'customer.recover_password.success' | t }} ",
-            '<CUSTOMER_LOGIN_FORM>' => "  {% form 'customer_login' %} ",
-            '</CUSTOMER_LOGIN_ERROR>' => " {{ form.errors | default_errors }} ",
-            '</CUSTOMER_LOGIN_TITLE>' => " {{ 'customer.login.title' | t }} ",
-            '</CUSTOMER_LOGIN_EMAIL_TITLE>' => " {{ 'customer.login.email' | t }} ",
-            '</CUSTOMER_LOGIN_PASSWORD_TITLE>' => " {{ 'customer.login.password' | t }} ",
-            '</CUSTOMER_LOGIN_FORGET_PASSWORD_TITLE>' => " {{ 'customer.login.forgot_password' | t }} ",
-            '</CUSTOMER_LOGIN_SING_IN_TITLE>' => " {{ 'customer.login.sign_in' | t }} ",
-            '</CUSTOMER_LOGIN_LOGIN_CANCEL_TITLE>' => " {{ 'customer.login.cancel' | t }} ",
-            '</CUSTOMER_LOGIN_CRETE_ACCOUNT_TITLE>' => " {{ 'layout.customer.create_account' | t | customer_register_link }} ",
-            '</CUSTOMER_LOGIN_PASSWORD_SUB_TITLE>' => " {{ 'customer.recover_password.subtext' | t }} ",
-            '</CUSTOMER_LOGIN_RECOVER_EMAIL>' => " {{ 'customer.recover_password.email' | t }} ",
-            '</CUSTOMER_LOGIN_RECOVER_PASSWORD_SUBMIT_TITLE>' => " {{ 'customer.recover_password.submit' | t }} ",
-            '</CUSTOMER_LOGIN_PASSWORD_CANCEL>' => " {{ 'customer.recover_password.cancel' | t }} ",
-            '</CUSTOMER_LOGIN_GUST_TITLE>' => " {{ 'customer.login.guest_title' | t }} ",
-            '</CUSTOMER_LOGIN_GUST_CONTINUE_TITLE>' => " {{ 'customer.login.guest_continue' | t }} ",
-            '</CUSTOMER_LOGIN_FORM>' => "{% endform %}",
         ];
         return $field;
     }
@@ -305,6 +370,7 @@ class ShopifyPageType extends Controller
             '</CUSTOMER_ORDER_FULFILLMENT_TRACKING_NUMBER>' => " {{ line_item.fulfillment.tracking_number}} ",
             '</ENDIF>' => "{% endif %}  ",
             '</ENDFOR>' => "{% endfor %}  ",
+            '</FOR_INDEX>' => "{{forloop.index}}",
             '</CUSTOMER_ORDER_LINE_ITEM_SKU>' => "{{ line_item.sku }} ",
             '</CUSTOMER_ORDER_LINE_ITEM_MONEY>' => "{{ line_item.price | money }} ",
             '</CUSTOMER_ORDER_LINE_ITEM_QUANTITY>' => "{{ line_item.quantity }} ",
@@ -344,7 +410,7 @@ class ShopifyPageType extends Controller
             '</CUSTOMER_ORDER_SHIPPING_ADDRESS_ZIP>' => "  {{ order.shipping_address.zip | upcase }} ",
             '</CUSTOMER_ORDER_SHIPPING_ADDRESS_COUNTRY>' => " {{ order.shipping_address.country }} ",
             '</CUSTOMER_ORDER_SHIPPING_ADDRESS_PHONE>' => "  {{ order.shipping_address.phone }} ",
-            '</CUSTOMER_ORDER_SHIPPING_ADDRESS_>' => "  ",
+
         ];
         return $field;
     }
@@ -379,6 +445,7 @@ class ShopifyPageType extends Controller
             '</CUSTOMER_REGISTER_CREATE_CUSTOMER_FORM_SHOP_CANCEL_TITLE>' => " {{ 'customer.register.cancel' | t }} ",
             '</END_FORM>' => "{% endform %}",
             '</ENDIF>' => "{% endif %}  ",
+            '</FOR_INDEX>' => "{{forloop.index}}",
         ];
         return $field;
     }
@@ -395,6 +462,7 @@ class ShopifyPageType extends Controller
             '<CUSTOMER_RESET_PASSWORD_FORM_SUBMIT>' => " {{ 'customer.reset_password.submit' | t }} ",
             '</END_FORM>' => "{% endform %}",
             '</ENDIF>' => "{% endif %}  ",
+            '</FOR_INDEX>' => "{{forloop.index}}",
         ];
         return $field;
     }
@@ -407,7 +475,7 @@ class ShopifyPageType extends Controller
             '</COLLECTION_LIST_COLLECTION_TITLE>' => "{{collection.title}}",
             '<COLLECTION_LIST_COLLECTION_PRODUCTS>' => "{% for product in collection.products  limit :5%}",
             '<COLLECTION_LIST_COLLECTION_PRODUCT_URL>' => "{{product.url}}",
-            '<COLLECTION_LIST_COLLECTION_PRODUCT_IMG>' => "{% if product.metafields.images.all %}{% assign images = product.metafields.images.all | split: \",\" | reverse  %}{% assign image = images[0] | split: \".jpg\" %}{{image}}_S.jpg  {%else%}{{ product.featured_image | product_img_url: 'medium' }}{% endif %}",
+            '<COLLECTION_LIST_COLLECTION_PRODUCT_IMG>' => "{% if product.metafields.images.all %}{% assign images = product.metafields.images.all | split: ',' | reverse  %}{% assign image = images[0] | split: '.jpg' %}{{image}}_S.jpg  {%else%}{{ product.featured_image | product_img_url: 'medium' }}{% endif %}",
             '<COLLECTION_LIST_COLLECTION_PRODUCT_TITLE>' => "{{product.title}}",
             '<COLLECTION_LIST_COLLECTION_PRODUCT_PRICE>' => "{%- if product.price_min  == product.price_max  -%}{{ product.price_min | money }}{% else %}{{ product.price_min | money }} - {{product.price_max | money }}{% endif %}",
             '<COLLECTION_LIST_COLLECTION_PRODUCT_SAIL>' => "{% if product.compare_at_price > product.price %}{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | money_without_currency | times: 100 | remove: '.0'}}%{% endif %} OFF",
@@ -415,6 +483,7 @@ class ShopifyPageType extends Controller
             '</END_FORM>' => "{% endform %}",
             '</ENDIF>' => "{% endif %}  ",
             '</ENDFOR>' => "{% endfor %}  ",
+            '</FOR_INDEX>' => "{{forloop.index}}",
         ];
         return $field;
     }
@@ -441,7 +510,60 @@ class ShopifyPageType extends Controller
             '</END_FORM>' => "{% endform %}",
             '</ENDIF>' => "{% endif %}  ",
             '</ENDFOR>' => "{% endfor %}  ",
+            '</FOR_INDEX>' => "{{forloop.index}}",
         ];
         return $field;
+    }
+
+    public function page_search()
+    {
+        {
+            $field = [
+                '</PAGE_SEARCH_RESULT>' => "{% for item in search.results %}",
+                '</PAGE_SEARCH_RESULT_ITEM_TITLE>' => "{{ item.title  }}",
+                '</PAGE_SEARCH_RESULT_ITEM_URL>' => "{{ item.url }}",
+                '</PAGE_SEARCH_RESULT_ITEM_CONTENT>' => "{{ item.content | strip_html | truncatewords: 20 | highlight: search.terms }}",
+                '</PAGE_SEARCH_RESULT_ITEM_IMG_URL>' => ' {% if item.metafields.images.all %}{% assign images = item.metafields.images.all | split: "," | reverse  %}{% assign image = images[0] | split: ".jpg" %}{{image}}_S.jpg  {%else%}{{ item.featured_image | product_img_url: "medium" }}{% endif %}',
+                '</PAGE_SEARCH_RESULT_ITEM_PRICE>' => ' {{ item.price | money }}',
+                '</PAGE_SEARCH_RESULT_ITEM_COMPARE_PRICE>' => ' {{ item.compare_at_price | money }}',
+                '</END_FORM>' => "{% endform %}",
+                '</ENDIF>' => "{% endif %}  ",
+                '</ENDFOR>' => "{% endfor %}  ",
+            ];
+            return $field;
+        }
+    }
+
+    public function page_product()
+    {
+        {
+            $field = [
+                '</PRODUCT_TITLE>' => "{{ product.title}}",
+                '</PRODUCT_DESCRIPTION>' => "{{ product.description }}",
+                '</PRODUCT_PRICE>' => "{{ product.price | money }}",
+                '<PRODUCT_IMAGES>' => "{% for image in product.images %}",
+                '</PRODUCT_IMAGES_SMALL>' => '{{ image.src | img_url: "small" }}',
+                '</PRODUCT_IMAGES_MEDIUM>' => '{{ image.src | img_url: "medium" }}',
+                '</PRODUCT_IMAGES_LARGE>' => '{{ image.src | img_url: "large" }}',
+                '</PRODUCT_IMAGES_ORIGINAL>' => '{{ image.src | img_url: "original" }}',
+                '</PRODUCT_IMAGES_DATALINK_THUMB>' => '{% assign image = product.metafields.images.all   %} {% assign images=image  | split: "," | reverse  %} {{images[0] | split: ".jpg" }}_T.jpg',
+                '</PRODUCT_IMAGES_DATALINK_SMALL>' => '{% assign image = product.metafields.images.all   %} {% assign images=image  | split: "," | reverse  %} {{images[0] | split: ".jpg" }}_S.jpg',
+                '</PRODUCT_IMAGES_DATALINK_ORIGINAL>' => '{% assign image = product.metafields.images.all   %} {% assign images=image  | split: "," | reverse  %} {{images[0] }}  ',
+                '<PRODUCT_IMGS_DATALINK>' => '{% assign image_metafields = product.metafields.images.all   %} {% assign images=image_metafields  | split: "," | reverse  %}  {% for image in images %}',
+                '</PRODUCT_IMGS_DATALINK>' => ' {% endfor %} ',
+                '</PRODUCT_IMGS_DATALINK_ITEM_THUMB>' => '{{ image | remove :".jpg" |append : "_T.jpg"}}',
+                '</PRODUCT_IMGS_DATALINK_ITEM_SMALL>' => '{{ image | remove :".jpg" |append : "_S.jpg"}}',
+                '</PRODUCT_IMGS_DATALINK_ITEM_ORIGINAL>' => '{{ image }}',
+                '</PRODUCT_OPTION_VALUE>' => " {% for product_option in product.options_with_values %}",
+                '</PRODUCT_OPTION_VALUE_NAME>' => "{{product_option.name}}",
+                '</PRODUCT_OPTION_VALUE_OPTION_VALUE>' => "{% for value in product_option.values %}",
+                '</PRODUCT_OPTION_VALUE_OPTION_VALUE_NAME>' => "{{ value }}",
+                '</END_FORM>' => "{% endform %}",
+                '</ENDIF>' => "{% endif %}  ",
+                '</ENDFOR>' => "{% endfor %}  ",
+                '</FOR_INDEX>' => "{{forloop.index}}",
+            ];
+            return $field;
+        }
     }
 }

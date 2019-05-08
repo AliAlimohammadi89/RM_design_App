@@ -18,42 +18,11 @@ class ConvertHtml extends Controller
     public function getfile($page_value)
     {
         if ($this->b2cType == 'Shopify') {
-            $p = new ShopifyPageType();
+            $p = new ShopifyPageType($this->page_name);
         } else {
             return 'in coming';
         }
-
-        switch ($this->page_name) {
-            case 'collectionPage':
-                $fields = $p->collectionPage();
-                break;
-            case 'page404':
-                $fields = $p->page404();
-                break;
-            case 'articlePage':
-                $fields = $p->articlePage();
-                break;
-            case 'blogPage':
-                $fields = $p->blogPage();
-                break;
-            case 'cartPage':
-                $fields = $p->cartPage();
-                break;
-            case 'customerAccount':
-                $fields = $p->customer_account();
-                break;
-            case 'customerActiveAccount':
-                $fields = $p->customer_active_account();
-                break;
-            case 'CustomerLogin':
-                $fields = $p->customer_login();
-                break;
-            default:
-                return 'no_page_find';
-                break;
-        }
-
-        $return = $this->get_page($page_value, $fields);
+        $return = $this->get_page($page_value, $p->items_field);
         return $return;
     }
 
