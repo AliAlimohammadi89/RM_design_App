@@ -16,6 +16,7 @@
 //});
 
 Route::post('/set_field', 'Api\V1\ConvertHtmlToB2CStoreController@get_field');
+Route::get('/set_field', 'Api\V1\ConvertHtmlToB2CStoreController@get_field');
 
 
 
