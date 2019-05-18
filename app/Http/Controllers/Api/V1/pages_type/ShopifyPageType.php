@@ -4,69 +4,89 @@ namespace App\Http\Controllers\Api\V1\pages_type;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Convert_html;
+use App\Http\Controllers\Convert_html_b2c;
+use phpDocumentor\Reflection\Types\Void_;
 
-class ShopifyPageType extends Controller implements Convert_html
+class ShopifyPageType extends Controller implements Convert_html_b2c
 {
     public $items_field;
+    public $items_local_page_name;
 
-    public function __construct($b2cType, $page)
+    public function __construct($page)
     {
+
         switch ($page) {
             case 'collectionPage':
                 $fields = $this->collectionPage();
+                $this->items_local_page_name = "collection";
                 break;
             case 'page404':
                 $fields = $this->page404();
+                $this->items_local_page_name = "404";
                 break;
             case 'articlePage':
                 $fields = $this->articlePage();
+                $this->items_local_page_name = "article";
                 break;
             case 'blogPage':
                 $fields = $this->blogPage();
+                $this->items_local_page_name = "blog";
                 break;
             case 'cartPage':
                 $fields = $this->cartPage();
+                $this->items_local_page_name = "cart";
                 break;
             case 'customerAccount':
                 $fields = $this->customer_account();
+                $this->items_local_page_name = "customers/order";
                 break;
             case 'customerActiveAccount':
                 $fields = $this->customer_active_account();
+                $this->items_local_page_name = "customers/activate_account";
                 break;
             case 'CustomerLogin':
                 $fields = $this->customer_login();
+                $this->items_local_page_name = "customers/login";
                 break;
             case 'customerAddress':
                 $fields = $this->customer_address();
+                $this->items_local_page_name = "customers/addresses";
                 break;
             case 'customerOrder':
                 $fields = $this->customer_order();
+                $this->items_local_page_name = "customers/order";
                 break;
             case 'customerRegister':
                 $fields = $this->customer_register();
+                $this->items_local_page_name = "customers/register";
                 break;
             case 'customerResetPassword':
                 $fields = $this->customer_reset_password();
+                $this->items_local_page_name = "customers/reset_password";
                 break;
-            case 'collectionList':
+            case 'collection':
                 $fields = $this->collection_list();
+                $this->items_local_page_name = "collection";
                 break;
             case 'pageContact':
                 $fields = $this->page_contact();
+                $this->items_local_page_name = "page.contact";
                 break;
             case 'pageSearch':
                 $fields = $this->page_search();
+                $this->items_local_page_name = "search";
                 break;
             case 'pageProduct':
                 $fields = $this->page_product();
+                $this->items_local_page_name = "product";
                 break;
             default:
+                $this->items_local_page_name = "no_page_find";
                 return 'no_page_find';
                 break;
         }
-
-
         $this->items_field = $fields;
+        return true;
     }
 
     public function collectionPage()
@@ -95,7 +115,11 @@ class ShopifyPageType extends Controller implements Convert_html
             'PRODUCT_IMGS_DATALINK_ITEM_THUMB' => '{{ image | remove :".jpg" |append : "_T.jpg"}}',
             'PRODUCT_IMGS_DATALINK_ITEM_SMALL' => '{{ image | remove :".jpg" |append : "_S.jpg"}}',
             'PRODUCT_IMGS_DATALINK_ITEM_ORIGINAL' => '{{ image }}',
-            'PRODUCT_DESCRIPTION' => '{{product.description}}'
+            'PRODUCT_DESCRIPTION' => '{{product.description}}',
+            'PRODUCT_IMG_URL' => ' {% if product.metafields.images.all %}{% assign images = product.metafields.images.all | split: " | reverse  %}{% assign image = images[0] | split: jpg" %}{{image}}_S.jpg  {%else%}{{ product.featured_image | product_img_url: "medium" }}{% endif %}',
+            'PRODUCT_OPTION1' => '{% for product_option in product.options_with_values offset:0 | limit :1 %}{% for value in product_option.values %}<p class="option1">{{ value }}</p>{% endfor %}{% endfor %}',
+            'PRODUCT_OPTION2' => '{% for product_option in product.options_with_values offset:1 | limit :1 %}{% for value in product_option.values %}<p class="option2">{{ value }}</p>{% endfor %}{% endfor %}',
+            'PRODUCT_OPTION3' => '{% for product_option in product.options_with_values offset:2 | limit :1 %}{% for value in product_option.values %}<p class="option3">{{ value }}</p>{% endfor %}{% endfor %}',
         ];
         return $field;
     }
@@ -312,17 +336,17 @@ class ShopifyPageType extends Controller implements Convert_html
             'CUSTOMER_ADDRESS_ADD_TITLE' => " {{ 'customer.addresses.add' | t }} ",
             'CUSTOMER_ADDRESS_CANCEL' => " {{ 'customer.addresses.cancel' | t }} ",
             'CUSTOMER_ADDRESS_TITLE_TITLE' => " {{ 'customer.addresses.title' | t }} ",
-            '-CUSTOMER_ADDRESS_ADDRESSES' => " {% for address in customer.addresses %} ",
-            '-CUSTOMER_ADDRESS_ADDRESSE_EDIT' => " {{ 'customer.addresses.edit' | t | edit_customer_address_link: address.id }} ",
-            '-CUSTOMER_ADDRESS_ADDRESSE_DELETE' => " {{ 'customer.addresses.delete' | t | delete_customer_address_link: address.id }} ",
-            '-CUSTOMER_ADDRESS_ADDRESSE_COMPANY' => "  {{ address.company }} ",
-            '-CUSTOMER_ADDRESS_ADDRESSE_STREET' => " {{ address.street }} ",
-            '-CUSTOMER_ADDRESS_ADDRESSE_CITY' => " {{ address.city | capitalize }} ",
-            '-CUSTOMER_ADDRESS_ADDRESSE_PROVINCE_CODE' => " {% if address.province_code %}{{ address.province_code | upcase }}{% endif %} ",
-            '-CUSTOMER_ADDRESS_ADDRESSE_COUNTRY' => " {{ address.country }} ",
-            '-CUSTOMER_ADDRESS_ADDRESSE_PHONE' => " {{ address.phone }} ",
-            '-CUSTOMER_ADDRESS_ADDRESSE_PAGINATES' => " {% paginate customer.addresses by 5 %} ",
-            '-CUSTOMER_ADDRESS_ADDRESSE_FORM' => " {% form 'customer_address', customer.new_address %} ",
+            '-CUSTOMER_ADDRESS_ADDRESSS' => " {% for address in customer.addresses %} ",
+            '-CUSTOMER_ADDRESS_ADDRESS_EDIT' => " {{ 'customer.addresses.edit' | t | edit_customer_address_link: address.id }} ",
+            '-CUSTOMER_ADDRESS_ADDRESS_DELETE' => " {{ 'customer.addresses.delete' | t | delete_customer_address_link: address.id }} ",
+            '-CUSTOMER_ADDRESS_ADDRESS_COMPANY' => "  {{ address.company }} ",
+            '-CUSTOMER_ADDRESS_ADDRESS_STREET' => " {{ address.street }} ",
+            '-CUSTOMER_ADDRESS_ADDRESS_CITY' => " {{ address.city | capitalize }} ",
+            '-CUSTOMER_ADDRESS_ADDRESS_PROVINCE_CODE' => " {% if address.province_code %}{{ address.province_code | upcase }}{% endif %} ",
+            '-CUSTOMER_ADDRESS_ADDRESS_COUNTRY' => " {{ address.country }} ",
+            '-CUSTOMER_ADDRESS_ADDRESS_PHONE' => " {{ address.phone }} ",
+            '-CUSTOMER_ADDRESS_ADDRESS_PAGINATES' => " {% paginate customer.addresses by 5 %} ",
+            '-CUSTOMER_ADDRESS_ADDRESS_FORM' => " {% form 'customer_address', customer.new_address %} ",
             'CUSTOMER_ADDRESS_ACCOUNT_RETURN' => " {{ 'customer.account.return' | t }} ",
             'CUSTOMER_ADDRESS_ACCOUNT_TITLE' => "{{ 'customer.account.title' | t }}",
             'CUSTOMER_ADDRESS_OPTION_TAGS' => "{{ country_option_tags }}",

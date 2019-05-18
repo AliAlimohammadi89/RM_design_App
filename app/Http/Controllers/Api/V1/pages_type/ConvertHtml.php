@@ -20,23 +20,25 @@ class ConvertHtml extends Controller implements Convert_html
     public function getfile($page_value)
     {
         if ($this->b2cType == 'Shopify') {
-            $p = new ShopifyPageType($this->b2cType, $this->page_name);
+            $B2C = new ShopifyPageType( $this->page_name);
+
         } else {
             return 'in coming';
         }
-        $return = $this->get_page($page_value, $p->items_field);
+            
+        $return = $this->get_page($page_value, $B2C->items_field,$B2C->items_local_page_name);
         return $return;
     }
 
 
-    public function get_page($page_html_value, $convert_tags)
+    public function get_page($page_html_value, $convert_tags,$pageurl)
     {
 
         $page_html_value = htmlspecialchars_decode($page_html_value, ENT_QUOTES);
         $m = new Mustache_Engine;
         $page_html_value = $m->render($page_html_value, $convert_tags); // "Hello World!"
         $page_html_value = htmlspecialchars_decode($page_html_value);
-        $my_file = storage_path() . "/Shopify_theme/templates/" . 'search' . ".liquid";
+        $my_file = storage_path() . "/Shopify_theme/templates/" .$pageurl . ".liquid";
         $handle = fopen($my_file, 'w') or die('Cannot open file:  ' . $my_file);
         //$data = implode(" ", $page_html_value);
         fwrite($handle, $page_html_value);

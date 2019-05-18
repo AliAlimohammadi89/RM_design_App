@@ -19,10 +19,12 @@ class ConvertHtmlToB2CStoreController extends Controller
     {
 
         $b2c_type = $request->input('b2c_type', "Shopify");
-        $page = $request->input('page', "pageSearch");
+        $page = $request->input('page', "pageSearch11");
         $files = $request->input('uploads');
         $b2c_type = "Shopify";//for test
-        $page = "pageSearch"; //for test
+       // $page = "pageSearch"; //for test
+        //dd($request->input());
+
         $file = new  ConvertHtml($b2c_type, $page);
 
         // $fileget = file($files);
