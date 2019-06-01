@@ -21,6 +21,9 @@ class GetAllB2C_shopify_field_type extends GraphQLType
             'id' => [
                 'type' => Type::int()
             ],
+            'is_for'=> [
+              'type' => Type::int()
+            ],
             'Shop_key' => [
                 'type' => Type::string()
             ],
@@ -30,9 +33,7 @@ class GetAllB2C_shopify_field_type extends GraphQLType
             'Shop_description' => [
                 'type' => Type::string()
             ],
-            'Parent_id' => [
-                'type' => Type::string()
-            ],
+
             'Page_permission' => [
                 'type' => Type::string()
             ],

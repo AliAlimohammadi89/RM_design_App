@@ -35,8 +35,10 @@ class ConvertHtml extends Controller implements Convert_html
     {
 
         $page_html_value = htmlspecialchars_decode($page_html_value, ENT_QUOTES);
-        $m = new Mustache_Engine;
-        $page_html_value = $m->render($page_html_value, $convert_tags); // "Hello World!"
+        $Mustache_Engine = new Mustache_Engine;
+        $page_html_value = $Mustache_Engine->render($page_html_value, $convert_tags); // "Hello World!"
+        $page_html_value= str_replace("{-","{{",$page_html_value);
+        $page_html_value= str_replace("-}","}}",$page_html_value);
         $page_html_value = htmlspecialchars_decode($page_html_value);
         $my_file = storage_path() . "/Shopify_theme/templates/" .$pageurl . ".liquid";
         $handle = fopen($my_file, 'w') or die('Cannot open file:  ' . $my_file);

@@ -103,6 +103,8 @@ return [
                 // 'example_query' => ExampleQuery::class,
                 'GetAll_shopify'=>\App\GraphQL\Query\GetAllB2C_shopify_field_type::class,
                 'GetItems_Page'=>\App\GraphQL\Query\GetfieldwithPagePermision::class,
+                'GetParent' =>\App\GraphQL\Query\Getparentitem::class,
+                "GetChild" =>\App\GraphQL\Query\Getchilditem::class
             ],
             'mutation' => [
                 // 'example_mutation'  => ExampleMutation::class,

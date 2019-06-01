@@ -5,79 +5,92 @@ namespace App\Http\Controllers\Api\V1\pages_type;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Convert_html;
 use App\Http\Controllers\Convert_html_b2c;
+use App\Shopify_Converter;
 use phpDocumentor\Reflection\Types\Void_;
 
 class ShopifyPageType extends Controller implements Convert_html_b2c
 {
     public $items_field;
     public $items_local_page_name;
+    protected function item_chenge($articles){
 
+        foreach ($articles as $article){
+            $array_return[$article->Shop_key]=$article->Shop_code;
+
+        }
+        return $array_return;
+    }
     public function __construct($page)
     {
+        $items = Shopify_Converter::get() ;
+        $this->items_field = $this->item_chenge( $items);
+        // dd($this->items_field);
+
+
 
         switch ($page) {
             case 'collectionPage':
-                $fields = $this->collectionPage();
+                // $fields; = $this->collectionPage();
                 $this->items_local_page_name = "collection";
                 break;
             case 'page404':
-                $fields = $this->page404();
+                // $fields; = $this->page404();
                 $this->items_local_page_name = "404";
                 break;
             case 'articlePage':
-                $fields = $this->articlePage();
+                // $fields; = $this->articlePage();
                 $this->items_local_page_name = "article";
                 break;
             case 'blogPage':
-                $fields = $this->blogPage();
+                // $fields; = $this->blogPage();
                 $this->items_local_page_name = "blog";
                 break;
             case 'cartPage':
-                $fields = $this->cartPage();
+                // $fields; = $this->cartPage();
                 $this->items_local_page_name = "cart";
                 break;
             case 'customerAccount':
-                $fields = $this->customer_account();
+                // $fields; = $this->customer_account();
                 $this->items_local_page_name = "customers/order";
                 break;
             case 'customerActiveAccount':
-                $fields = $this->customer_active_account();
+                // $fields; = $this->customer_active_account();
                 $this->items_local_page_name = "customers/activate_account";
                 break;
             case 'CustomerLogin':
-                $fields = $this->customer_login();
+                // $fields; = $this->customer_login();
                 $this->items_local_page_name = "customers/login";
                 break;
             case 'customerAddress':
-                $fields = $this->customer_address();
+                // $fields; = $this->customer_address();
                 $this->items_local_page_name = "customers/addresses";
                 break;
             case 'customerOrder':
-                $fields = $this->customer_order();
+                // $fields; = $this->customer_order();
                 $this->items_local_page_name = "customers/order";
                 break;
             case 'customerRegister':
-                $fields = $this->customer_register();
+                // $fields; = $this->customer_register();
                 $this->items_local_page_name = "customers/register";
                 break;
             case 'customerResetPassword':
-                $fields = $this->customer_reset_password();
+                // $fields; = $this->customer_reset_password();
                 $this->items_local_page_name = "customers/reset_password";
                 break;
             case 'collection':
-                $fields = $this->collection_list();
+                // $fields; = $this->collection_list();
                 $this->items_local_page_name = "collection";
                 break;
             case 'pageContact':
-                $fields = $this->page_contact();
+                // $fields; = $this->page_contact();
                 $this->items_local_page_name = "page.contact";
                 break;
             case 'pageSearch':
-                $fields = $this->page_search();
+                // $fields; = $this->page_search();
                 $this->items_local_page_name = "search";
                 break;
             case 'pageProduct':
-                $fields = $this->page_product();
+                // $fields; = $this->page_product();
                 $this->items_local_page_name = "product";
                 break;
             default:
@@ -85,7 +98,8 @@ class ShopifyPageType extends Controller implements Convert_html_b2c
                 return 'no_page_find';
                 break;
         }
-        $this->items_field = $fields;
+        // $this->items_field = $fields;
+
         return true;
     }
 

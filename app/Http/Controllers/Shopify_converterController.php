@@ -13,35 +13,62 @@ class Shopify_converterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function checkaddslashes($str)
+    {
+        if (strpos(str_replace("\'", "", " $str"), "'") != false)
+            return addslashes($str);
+        else
+            return $str;
+    }
+
+
     public function index()
     {
-        die;
+
+
+       // print_r($b);
+      // dd($b,$field);
+
         $file_path = storage_path() . "\Book1.csv";
         $handle = fopen($file_path, "r");
         $header = true;
         print "<pre>";
+        DB::table('shopify__converters')->delete();
+        DB::table('Relationconvertor')->delete();
         while ($csvLine = fgetcsv($handle, 1000, ",")) {
+            if(!isset($csvLine[0]) or $csvLine[0] == "")break;
             if ($header) {
                 $header = false;
             } else {
 
-              //  print str_replace('�'," ",$csvLine[6]);
+                $parent_ids = explode(",", $csvLine[3]);
 
-//                DB::insert('insert into shopify__converters (Shop_key, Shop_code,Shop_description,is_for,Parent_id,Page_permission) values (?,?,?,?,?,)', array($csvLine[1],$csvLine[2],$csvLine[6],$csvLine[5],$csvLine[3],$csvLine[4],));
+                // $parent_id =  DB::table('shopify__converters')->where('Parent_id', '2')->get();
+                // dd($parent_id);
 
+                $ar = array('‘', "'", '"', ",");
+                $description = str_replace($ar, " ", $csvLine[6]);
+                //$description = serialize($description);    # safe -- won't count the slash
+                $description = addslashes($description);
 
                 DB::table('shopify__converters')->insert([
+                    'id' => $csvLine[0],
                     'Shop_key' => $csvLine[1],
                     'Shop_code' => $csvLine[2],
-                    'Shop_description' =>  $csvLine[6],
+                    'Shop_description' => $description,
                     'is_for' => $csvLine[5],
-                    'Parent_id' => $csvLine[3],
+                    'Parent_id' => 11,
                     'Page_permission' => $csvLine[4],
                 ]);
+                foreach ($parent_ids as $parent_id) {
+                    DB::table('Relationconvertor')->insert([
+                        'shopify__converters_id' => $csvLine[0],
+                        'shopify__converters_parent_id' => $parent_id,
+                    ]);
+
+                }
             }
         }
-
-
     }
 
     /**
